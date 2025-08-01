@@ -1,0 +1,82 @@
+{
+  "20": {
+    "name": "Armchair Books",
+    "address": "72 - 74 West Ports, EH1 2LE",
+    "current": {
+      "lat": 55.9533,
+      "lng": -3.1883
+    },
+    "lat": 55.9468,
+    "lng": -3.1982
+  },
+  "81": {
+    "name": "Victorian Photos",
+    "address": "8 Infirmary Street",
+    "current": {
+      "lat": 55.9533,
+      "lng": -3.1883
+    },
+    "lat": 55.9483,
+    "lng": -3.1845
+  },
+  "82": {
+    "name": "All Together Edinburgh",
+    "address": "87 Leith Walk Edinburgh, EH6 8LX",
+    "current": {
+      "lat": 55.9533,
+      "lng": -3.1883
+    },
+    "lat": 55.9628,
+    "lng": -3.1777
+  },
+  "83": {
+    "name": "Armstrongs Grassmarket",
+    "address": "81-83 Grassmarket, EH12HJ",
+    "current": {
+      "lat": 55.9533,
+      "lng": -3.1883
+    },
+    "lat": 55.9470,
+    "lng": -3.1966
+  },
+  "84": {
+    "name": "Armstrongs Cockburn Street",
+    "address": "29 Cockburn Street, EH89JB",
+    "current": {
+      "lat": 55.9533,
+      "lng": -3.1883
+    },
+    "lat": 55.9509,
+    "lng": -3.1891
+  },
+  "85": {
+    "name": "Armstrongs Teviot Place",
+    "address": "14 Teviot Place, EH12QZ",
+    "current": {
+      "lat": 55.9533,
+      "lng": -3.1883
+    },
+    "lat": 55.9463,
+    "lng": -3.1892
+  },
+  "86": {
+    "name": "Armstrongs Clerk Street",
+    "address": "64-66 Clerk Street, Newington, EH89JB",
+    "current": {
+      "lat": 55.9533,
+      "lng": -3.1883
+    },
+    "lat": 55.9419,
+    "lng": -3.1816
+  },
+  "87": {
+    "name": "Carnivale Vintage Albert Place",
+    "address": "21-22 Albert Place, Leith Walk, EH3 9AH",
+    "current": {
+      "lat": 55.9533,
+      "lng": -3.1883
+    },
+    "lat": 55.9621,
+    "lng": -3.1792
+  }
+}

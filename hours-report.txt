@@ -1,0 +1,1030 @@
+COMPLETE OPENING HOURS VERIFICATION REPORT
+=========================================
+
+PLACE: Alan Day (ID: 17)
+--------------------------------------------------
+TEXT HOURS (from places table):
+  Sunday: By appointment only
+  Monday: By appointment only
+  Tuesday: By appointment only
+  Wednesday: By appointment only
+  Thursday: By appointment only
+  Friday: By appointment only
+  Saturday: By appointment only
+
+STRUCTURED HOURS (from opening_hours table):
+  Sunday: By appointment only
+  Monday: By appointment only
+  Tuesday: By appointment only
+  Wednesday: By appointment only
+  Thursday: By appointment only
+  Friday: By appointment only
+  Saturday: By appointment only
+
+
+PLACE: Carnivale Vintage (ID: 24)
+--------------------------------------------------
+TEXT HOURS (from places table):
+  No text hours available
+
+STRUCTURED HOURS (from opening_hours table):
+  Sunday: 11:00-18:00
+  Monday: 11:00-18:00
+  Tuesday: 11:00-18:00
+  Wednesday: 11:00-18:00
+  Thursday: 11:00-18:00
+  Friday: 11:00-18:00
+  Saturday: 11:00-18:00
+
+
+PLACE: Cavanagh�s Antiques (ID: 25)
+--------------------------------------------------
+TEXT HOURS (from places table):
+  No text hours available
+
+STRUCTURED HOURS (from opening_hours table):
+  Sunday: 11:00-17:00
+  Friday: 11:00-17:00
+  Saturday: 11:00-17:00
+
+MISSING DAYS: Monday, Tuesday, Wednesday, Thursday
+
+
+PLACE: Cookie (ID: 26)
+--------------------------------------------------
+TEXT HOURS (from places table):
+  No text hours available
+
+STRUCTURED HOURS (from opening_hours table):
+  Sunday: 10:00-17:00
+  Monday: 10:00-17:00
+  Tuesday: 10:00-17:00
+  Wednesday: 10:00-17:00
+  Thursday: 10:00-17:00
+  Friday: 10:00-17:00
+  Saturday: 10:00-17:00
+
+
+PLACE: Courtyard (ID: 27)
+--------------------------------------------------
+TEXT HOURS (from places table):
+  No text hours available
+
+STRUCTURED HOURS (from opening_hours table):
+  Sunday: 10:00-16:00
+  Monday: 10:00-16:00
+  Tuesday: 10:00-16:00
+  Wednesday: 10:00-16:00
+  Thursday: 10:00-16:00
+  Friday: 10:00-16:00
+  Saturday: 10:00-16:00
+
+
+PLACE: Cabaret (ID: 23)
+--------------------------------------------------
+TEXT HOURS (from places table):
+  No text hours available
+
+STRUCTURED HOURS (from opening_hours table):
+  Sunday: 10:00-17:00
+  Monday: 10:00-17:00
+  Tuesday: 10:00-17:00
+  Wednesday: 10:00-17:00
+  Thursday: 10:00-17:00
+  Friday: 10:00-17:00
+  Saturday: 10:00-17:00
+
+
+PLACE: Duncan & Reid (ID: 29)
+--------------------------------------------------
+TEXT HOURS (from places table):
+  No text hours available
+
+STRUCTURED HOURS (from opening_hours table):
+  Wednesday: 11:00-16:00
+
+MISSING DAYS: Sunday, Monday, Tuesday, Thursday, Friday, Saturday
+
+
+PLACE: Anthony Woodd (ID: 18)
+--------------------------------------------------
+TEXT HOURS (from places table):
+  Sunday: 11:30-16:00
+  Monday: 11:00-17:00
+  Tuesday: 11:00-17:00
+  Wednesday: 11:00-17:00
+  Thursday: 11:00-17:00
+  Friday: 11:00-17:00
+  Saturday: 11:00-16:00
+
+STRUCTURED HOURS (from opening_hours table):
+  Sunday: 11:30-16:00
+  Monday: 11:00-17:00
+  Tuesday: 11:00-17:00
+  Wednesday: 11:00-17:00
+  Thursday: 11:00-17:00
+  Friday: 11:00-17:00
+  Saturday: 11:00-16:00
+
+
+PLACE: Edinburgh Antique Centre (ID: 30)
+--------------------------------------------------
+TEXT HOURS (from places table):
+  No text hours available
+
+STRUCTURED HOURS (from opening_hours table):
+  Sunday: 10:00-17:00
+  Monday: 10:00-17:00
+  Tuesday: 10:00-17:00
+  Wednesday: 10:00-17:00
+  Thursday: 10:00-17:00
+  Friday: 10:00-17:00
+  Saturday: 10:00-17:00
+
+
+PLACE: Edinburgh Antiques & Collectors Fair (ID: 6)
+--------------------------------------------------
+TEXT HOURS (from places table):
+  First Saturday of each month: 10am-4pm
+
+STRUCTURED HOURS (from opening_hours table):
+  Sunday: Closed
+  Monday: 9:00-17:00
+  Tuesday: 9:00-17:00
+  Wednesday: 9:00-17:00
+  Thursday: 9:00-17:00
+  Friday: 9:00-17:00
+  Saturday: 10:00-16:00
+
+
+PLACE: Drennan Sturrock (ID: 28)
+--------------------------------------------------
+TEXT HOURS (from places table):
+  No text hours available
+
+STRUCTURED HOURS (from opening_hours table):
+  No structured hours available
+
+MISSING DAYS: Sunday, Monday, Tuesday, Wednesday, Thursday, Friday, Saturday
+
+
+PLACE: Bowerbird (ID: 21)
+--------------------------------------------------
+TEXT HOURS (from places table):
+  No text hours available
+
+STRUCTURED HOURS (from opening_hours table):
+  Friday: 10:00-17:00
+
+MISSING DAYS: Sunday, Monday, Tuesday, Wednesday, Thursday, Saturday
+
+
+PLACE: Aquarius (ID: 19)
+--------------------------------------------------
+TEXT HOURS (from places table):
+  No text hours available
+
+STRUCTURED HOURS (from opening_hours table):
+  Sunday: 11:00-18:00
+  Monday: 11:00-18:00
+  Tuesday: 11:00-18:00
+  Wednesday: 11:00-18:00
+  Thursday: 11:00-18:00
+  Friday: 11:00-18:00
+  Saturday: 11:00-18:00
+
+
+PLACE: Edinburgh Collectables (ID: 32)
+--------------------------------------------------
+TEXT HOURS (from places table):
+  No text hours available
+
+STRUCTURED HOURS (from opening_hours table):
+  Sunday: 11:00-18:00
+  Wednesday: 11:00-18:00
+  Friday: 11:00-18:00
+  Saturday: 11:00-18:00
+
+MISSING DAYS: Monday, Tuesday, Thursday
+
+
+PLACE: Emporium 62 (ID: 34)
+--------------------------------------------------
+TEXT HOURS (from places table):
+  No text hours available
+
+STRUCTURED HOURS (from opening_hours table):
+  Sunday: 11:00-18:00
+  Monday: 11:00-18:00
+  Tuesday: 11:00-18:00
+  Wednesday: 11:00-18:00
+  Thursday: 11:00-18:00
+  Friday: 11:00-18:00
+  Saturday: 11:00-18:00
+
+
+PLACE: Epoca (ID: 35)
+--------------------------------------------------
+TEXT HOURS (from places table):
+  No text hours available
+
+STRUCTURED HOURS (from opening_hours table):
+  Sunday: 12:00-18:00
+  Monday: 12:00-18:00
+  Tuesday: 12:00-18:00
+  Wednesday: 12:00-18:00
+  Thursday: 12:00-18:00
+  Friday: 12:00-18:00
+  Saturday: 12:00-18:00
+
+
+PLACE: Elaine�s Vintage Clothing (ID: 33)
+--------------------------------------------------
+TEXT HOURS (from places table):
+  No text hours available
+
+STRUCTURED HOURS (from opening_hours table):
+  Sunday: 1:00-6:00
+  Monday: 1:00-6:00
+  Tuesday: 1:00-6:00
+  Wednesday: 1:00-6:00
+  Thursday: 1:00-6:00
+  Friday: 1:00-6:00
+  Saturday: 1:00-6:00
+
+
+PLACE: Armchair Books (ID: 20)
+--------------------------------------------------
+TEXT HOURS (from places table):
+  No text hours available
+
+STRUCTURED HOURS (from opening_hours table):
+  Sunday: 10:00-18:00
+  Monday: 1:00-5:00
+  Tuesday: 1:00-5:00
+  Wednesday: 1:00-5:00
+  Thursday: 1:00-5:00
+  Friday: 10:00-18:00
+  Saturday: 10:00-18:00
+
+
+PLACE: Georgian Antiques (ID: 38)
+--------------------------------------------------
+TEXT HOURS (from places table):
+  No text hours available
+
+STRUCTURED HOURS (from opening_hours table):
+  Sunday: 10:00-14:00
+  Monday: 9:00-17:00
+  Tuesday: 9:00-17:00
+  Wednesday: 9:00-17:00
+  Thursday: 9:00-17:00
+  Friday: 9:00-17:00
+  Saturday: 10:00-14:00
+
+
+PLACE: Godiva (ID: 39)
+--------------------------------------------------
+TEXT HOURS (from places table):
+  No text hours available
+
+STRUCTURED HOURS (from opening_hours table):
+  Sunday: 11:00-18:00
+  Monday: 11:00-18:00
+  Tuesday: 11:00-18:00
+  Wednesday: 11:00-18:00
+  Thursday: 11:00-18:00
+  Friday: 11:00-18:00
+  Saturday: 11:00-18:00
+
+
+PLACE: Goodwins (ID: 41)
+--------------------------------------------------
+TEXT HOURS (from places table):
+  No text hours available
+
+STRUCTURED HOURS (from opening_hours table):
+  Sunday: 10:00-16:00
+  Tuesday: 10:00-16:00
+  Wednesday: 10:00-16:00
+  Thursday: 10:00-16:00
+  Friday: 10:00-16:00
+  Saturday: 10:00-16:00
+
+MISSING DAYS: Monday
+
+
+PLACE: Goodwins (ID: 40)
+--------------------------------------------------
+TEXT HOURS (from places table):
+  No text hours available
+
+STRUCTURED HOURS (from opening_hours table):
+  Sunday: 10:00-16:00
+  Tuesday: 10:00-16:00
+  Wednesday: 10:00-16:00
+  Thursday: 10:00-16:00
+  Friday: 10:00-16:00
+  Saturday: 10:00-16:00
+
+MISSING DAYS: Monday
+
+
+PLACE: Grange Clocks (ID: 42)
+--------------------------------------------------
+TEXT HOURS (from places table):
+  No text hours available
+
+STRUCTURED HOURS (from opening_hours table):
+  Tuesday: 9:00-17:00
+  Thursday: 9:00-17:00
+  Friday: 9:00-17:00
+
+MISSING DAYS: Sunday, Monday, Wednesday, Saturday
+
+
+PLACE: Harlequin Antiques (ID: 43)
+--------------------------------------------------
+TEXT HOURS (from places table):
+  No text hours available
+
+STRUCTURED HOURS (from opening_hours table):
+  Sunday: 10:00-17:00
+  Monday: 10:00-17:00
+  Tuesday: 10:00-17:00
+  Wednesday: 10:00-17:00
+  Thursday: 10:00-17:00
+  Friday: 10:00-17:00
+  Saturday: 10:00-17:00
+
+
+PLACE: Herman Brown (ID: 44)
+--------------------------------------------------
+TEXT HOURS (from places table):
+  No text hours available
+
+STRUCTURED HOURS (from opening_hours table):
+  Sunday: 12:00-18:00
+  Tuesday: 12:00-18:00
+  Wednesday: 12:00-18:00
+  Thursday: 12:00-18:00
+  Friday: 12:00-18:00
+  Saturday: 12:00-18:00
+
+MISSING DAYS: Monday
+
+
+PLACE: Inverleith Saleroom (ID: 45)
+--------------------------------------------------
+TEXT HOURS (from places table):
+  No text hours available
+
+STRUCTURED HOURS (from opening_hours table):
+  Sunday: 11:00-16:00
+  Monday: 11:00-16:00
+  Wednesday: 11:00-16:00
+  Friday: 11:00-16:00
+  Saturday: 11:00-16:00
+
+MISSING DAYS: Tuesday, Thursday
+
+
+PLACE: Islander (ID: 46)
+--------------------------------------------------
+TEXT HOURS (from places table):
+  No text hours available
+
+STRUCTURED HOURS (from opening_hours table):
+  Sunday: 11:00-16:00
+  Monday: 11:00-16:00
+  Tuesday: 11:00-16:00
+  Wednesday: 11:00-16:00
+  Thursday: 11:00-16:00
+  Friday: 11:00-16:00
+  Saturday: 11:00-16:00
+
+
+PLACE: John Love (ID: 49)
+--------------------------------------------------
+TEXT HOURS (from places table):
+  No text hours available
+
+STRUCTURED HOURS (from opening_hours table):
+  Sunday: 10:00-17:00
+  Monday: 10:00-17:00
+  Tuesday: 10:00-17:00
+  Wednesday: 10:00-17:00
+  Thursday: 10:00-17:00
+  Friday: 10:00-17:00
+  Saturday: 10:00-17:00
+
+
+PLACE: James Scott (ID: 47)
+--------------------------------------------------
+TEXT HOURS (from places table):
+  No text hours available
+
+STRUCTURED HOURS (from opening_hours table):
+  Sunday: 10:00-17:00
+  Monday: 10:00-17:00
+  Tuesday: 10:00-17:00
+  Wednesday: 10:00-17:00
+  Thursday: 10:00-17:00
+  Friday: 10:00-17:00
+  Saturday: 10:00-17:00
+
+
+PLACE: George Pirie  (ID: 37)
+--------------------------------------------------
+TEXT HOURS (from places table):
+  No text hours available
+
+STRUCTURED HOURS (from opening_hours table):
+  Sunday: 10:00-18:00
+  Monday: 10:00-18:00
+  Tuesday: 10:00-18:00
+  Wednesday: 10:00-18:00
+  Thursday: 10:00-18:00
+  Friday: 10:00-18:00
+  Saturday: 10:00-18:00
+
+
+PLACE: Joey D (ID: 48)
+--------------------------------------------------
+TEXT HOURS (from places table):
+  No text hours available
+
+STRUCTURED HOURS (from opening_hours table):
+  Sunday: 11:00-18:00
+  Monday: 11:00-18:00
+  Tuesday: 11:00-18:00
+  Wednesday: 11:00-18:00
+  Thursday: 11:00-18:00
+  Friday: 11:00-18:00
+  Saturday: 11:00-18:00
+
+
+PLACE: Folly (ID: 36)
+--------------------------------------------------
+TEXT HOURS (from places table):
+  No text hours available
+
+STRUCTURED HOURS (from opening_hours table):
+  Sunday: 10:00-17:00
+  Monday: 10:00-17:00
+  Tuesday: 10:00-17:00
+  Wednesday: 10:00-17:00
+  Thursday: 10:00-17:00
+  Friday: 10:00-17:00
+  Saturday: 10:00-17:00
+
+
+PLACE: Leith Antiquarian Books (ID: 3)
+--------------------------------------------------
+TEXT HOURS (from places table):
+  Tue-Sat: 10am-5:30pm
+
+STRUCTURED HOURS (from opening_hours table):
+  Sunday: Closed
+  Monday: 9:00-17:00
+  Tuesday: 9:00-17:00
+  Wednesday: 9:00-17:00
+  Thursday: 9:00-17:00
+  Friday: 9:00-17:00
+  Saturday: 10:00-16:00
+
+
+PLACE: Joseph Bonnar (ID: 50)
+--------------------------------------------------
+TEXT HOURS (from places table):
+  No text hours available
+
+STRUCTURED HOURS (from opening_hours table):
+  Sunday: 11:00-17:00
+  Tuesday: 11:00-17:00
+  Wednesday: 11:00-17:00
+  Thursday: 11:00-17:00
+  Friday: 11:00-17:00
+  Saturday: 11:00-17:00
+
+MISSING DAYS: Monday
+
+
+PLACE: Lifestyle (ID: 51)
+--------------------------------------------------
+TEXT HOURS (from places table):
+  No text hours available
+
+STRUCTURED HOURS (from opening_hours table):
+  Monday: 9:00-17:00
+  Tuesday: 9:00-17:00
+  Wednesday: 9:00-17:00
+  Thursday: 9:00-17:00
+  Friday: 9:00-17:00
+
+MISSING DAYS: Sunday, Saturday
+
+
+PLACE: Miss Bizio Couture (ID: 55)
+--------------------------------------------------
+TEXT HOURS (from places table):
+  No text hours available
+
+STRUCTURED HOURS (from opening_hours table):
+  Sunday: 10:00-17:00
+  Monday: 10:00-17:00
+  Tuesday: 10:00-17:00
+  Wednesday: 10:00-17:00
+  Thursday: 10:00-17:00
+  Friday: 10:00-17:00
+  Saturday: 10:00-17:00
+
+
+PLACE: McNaughtan�s Bookshop (ID: 54)
+--------------------------------------------------
+TEXT HOURS (from places table):
+  No text hours available
+
+STRUCTURED HOURS (from opening_hours table):
+  Sunday: 11:00-17:00
+  Tuesday: 11:00-17:00
+  Wednesday: 11:00-17:00
+  Thursday: 11:00-17:00
+  Friday: 11:00-17:00
+  Saturday: 11:00-17:00
+
+MISSING DAYS: Monday
+
+
+PLACE: Martinez (ID: 53)
+--------------------------------------------------
+TEXT HOURS (from places table):
+  No text hours available
+
+STRUCTURED HOURS (from opening_hours table):
+  Monday: 11:00-17:00
+  Tuesday: 11:00-17:00
+  Wednesday: 11:00-14:00
+  Thursday: 11:00-17:00
+  Friday: 11:00-17:00
+
+MISSING DAYS: Sunday, Saturday
+
+
+PLACE: Morningside Vintage (ID: 5)
+--------------------------------------------------
+TEXT HOURS (from places table):
+  Mon-Sat: 10am-5:30pm
+
+STRUCTURED HOURS (from opening_hours table):
+  Sunday: Closed
+  Monday: 9:00-17:00
+  Tuesday: 9:00-17:00
+  Wednesday: 9:00-17:00
+  Thursday: 9:00-17:00
+  Friday: 9:00-17:00
+  Saturday: 10:00-16:00
+
+
+PLACE: Nomads Tent (ID: 57)
+--------------------------------------------------
+TEXT HOURS (from places table):
+  No text hours available
+
+STRUCTURED HOURS (from opening_hours table):
+  Sunday: 10:00-17:00
+  Monday: 10:00-17:00
+  Tuesday: 10:00-17:00
+  Wednesday: 10:00-17:00
+  Thursday: 10:00-17:00
+  Friday: 10:00-17:00
+  Saturday: 10:00-17:00
+
+
+PLACE: Little Blue Door (ID: 52)
+--------------------------------------------------
+TEXT HOURS (from places table):
+  No text hours available
+
+STRUCTURED HOURS (from opening_hours table):
+  Sunday: 12:00-18:00
+  Wednesday: 12:00-18:00
+  Friday: 12:00-18:00
+  Saturday: 12:00-18:00
+
+MISSING DAYS: Monday, Tuesday, Thursday
+
+
+PLACE: Pascal  (ID: 58)
+--------------------------------------------------
+TEXT HOURS (from places table):
+  No text hours available
+
+STRUCTURED HOURS (from opening_hours table):
+  Sunday: 1:00-5:00
+  Wednesday: 1:00-5:00
+  Friday: 1:00-5:00
+  Saturday: 1:00-5:00
+
+MISSING DAYS: Monday, Tuesday, Thursday
+
+
+PLACE: Mr Purves (ID: 56)
+--------------------------------------------------
+TEXT HOURS (from places table):
+  No text hours available
+
+STRUCTURED HOURS (from opening_hours table):
+  Sunday: 10:00-16:00
+  Monday: 10:00-16:00
+  Tuesday: 10:00-16:00
+  Wednesday: 10:00-16:00
+  Thursday: 10:00-16:00
+  Friday: 10:00-16:00
+  Saturday: 10:00-16:00
+
+
+PLACE: Quadrant  (ID: 62)
+--------------------------------------------------
+TEXT HOURS (from places table):
+  No text hours available
+
+STRUCTURED HOURS (from opening_hours table):
+  Sunday: 10:00-18:00
+  Friday: 2:00-5:00
+  Saturday: 10:00-18:00
+
+MISSING DAYS: Monday, Tuesday, Wednesday, Thursday
+
+
+PLACE: Persian Rug Village (ID: 60)
+--------------------------------------------------
+TEXT HOURS (from places table):
+  No text hours available
+
+STRUCTURED HOURS (from opening_hours table):
+  Sunday: 10:00-18:00
+  Monday: 10:00-18:00
+  Tuesday: 10:00-18:00
+  Wednesday: 10:00-18:00
+  Thursday: 10:00-18:00
+  Friday: 10:00-18:00
+  Saturday: 10:00-18:00
+
+
+PLACE: Patrick Buckley  (ID: 59)
+--------------------------------------------------
+TEXT HOURS (from places table):
+  No text hours available
+
+STRUCTURED HOURS (from opening_hours table):
+  Sunday: 11:00-17:00
+  Monday: 11:00-17:00
+  Tuesday: 11:00-17:00
+  Wednesday: 11:00-17:00
+  Thursday: 11:00-17:00
+  Friday: 11:00-17:00
+  Saturday: 11:00-17:00
+
+
+PLACE: Retrospect (ID: 64)
+--------------------------------------------------
+TEXT HOURS (from places table):
+  No text hours available
+
+STRUCTURED HOURS (from opening_hours table):
+  Sunday: 10:00-18:00
+  Monday: 10:00-18:00
+  Tuesday: 10:00-18:00
+  Wednesday: 12:00-17:00
+  Thursday: 10:00-18:00
+  Friday: 10:00-18:00
+  Saturday: 10:00-18:00
+
+
+PLACE: Royal Mile Curios (ID: 65)
+--------------------------------------------------
+TEXT HOURS (from places table):
+  No text hours available
+
+STRUCTURED HOURS (from opening_hours table):
+  Sunday: 10:00-17:00
+  Tuesday: 10:00-17:00
+  Wednesday: 10:00-17:00
+  Thursday: 10:00-17:00
+  Friday: 10:00-17:00
+  Saturday: 10:00-17:00
+
+MISSING DAYS: Monday
+
+
+PLACE: Retro Morrison Street (ID: 63)
+--------------------------------------------------
+TEXT HOURS (from places table):
+  No text hours available
+
+STRUCTURED HOURS (from opening_hours table):
+  Sunday: 10:00-16:00
+  Monday: 10:00-16:00
+  Tuesday: 10:00-16:00
+  Wednesday: 10:00-16:00
+  Thursday: 10:00-16:00
+  Friday: 10:00-16:00
+  Saturday: 10:00-16:00
+
+
+PLACE: Simon Scott (ID: 67)
+--------------------------------------------------
+TEXT HOURS (from places table):
+  No text hours available
+
+STRUCTURED HOURS (from opening_hours table):
+  Monday: 10:00-18:00
+  Tuesday: 10:00-18:00
+  Wednesday: 10:00-18:00
+  Thursday: 10:00-18:00
+  Friday: 10:00-18:00
+
+MISSING DAYS: Sunday, Saturday
+
+
+PLACE: Royal Mile Gallery (ID: 66)
+--------------------------------------------------
+TEXT HOURS (from places table):
+  No text hours available
+
+STRUCTURED HOURS (from opening_hours table):
+  Sunday: 11:00-17:00
+  Monday: 11:00-17:00
+  Tuesday: 11:00-17:00
+  Wednesday: 11:00-17:00
+  Thursday: 11:00-17:00
+  Friday: 11:00-17:00
+  Saturday: 11:00-17:00
+
+
+PLACE: Still Life (ID: 68)
+--------------------------------------------------
+TEXT HOURS (from places table):
+  No text hours available
+
+STRUCTURED HOURS (from opening_hours table):
+  Sunday: 12:00-17:00
+  Monday: 12:00-17:00
+  Tuesday: 12:00-17:00
+  Wednesday: 12:00-17:00
+  Thursday: 12:00-17:00
+  Friday: 12:00-17:00
+  Saturday: 12:00-17:00
+
+
+PLACE: Stock Xchange (ID: 69)
+--------------------------------------------------
+TEXT HOURS (from places table):
+  No text hours available
+
+STRUCTURED HOURS (from opening_hours table):
+  Sunday: 11:00-17:00
+  Tuesday: 11:00-17:00
+  Wednesday: 11:00-17:00
+  Thursday: 11:00-17:00
+  Friday: 11:00-17:00
+  Saturday: 11:00-17:00
+
+MISSING DAYS: Monday
+
+
+PLACE: Theodore David (ID: 70)
+--------------------------------------------------
+TEXT HOURS (from places table):
+  No text hours available
+
+STRUCTURED HOURS (from opening_hours table):
+  Sunday: 11:00-16:00
+  Tuesday: 10:00-16:00
+  Wednesday: 10:00-16:00
+  Thursday: 10:00-16:00
+  Friday: 10:00-16:00
+  Saturday: 11:00-16:00
+
+MISSING DAYS: Monday
+
+
+PLACE: Those Were The Days (ID: 71)
+--------------------------------------------------
+TEXT HOURS (from places table):
+  No text hours available
+
+STRUCTURED HOURS (from opening_hours table):
+  Sunday: 11:00-17:00
+  Friday: 11:00-17:00
+  Saturday: 11:00-17:00
+
+MISSING DAYS: Monday, Tuesday, Wednesday, Thursday
+
+
+PLACE: Those Were The Days � Bridal (ID: 72)
+--------------------------------------------------
+TEXT HOURS (from places table):
+  No text hours available
+
+STRUCTURED HOURS (from opening_hours table):
+  Sunday: 10:00-17:00
+  Friday: 10:00-17:00
+  Saturday: 10:00-17:00
+
+MISSING DAYS: Monday, Tuesday, Wednesday, Thursday
+
+
+PLACE: Tills Bookshop (ID: 74)
+--------------------------------------------------
+TEXT HOURS (from places table):
+  No text hours available
+
+STRUCTURED HOURS (from opening_hours table):
+  Sunday: 10:00-18:00
+  Monday: 10:00-18:00
+  Tuesday: 10:00-18:00
+  Wednesday: 10:00-18:00
+  Thursday: 10:00-18:00
+  Friday: 10:00-18:00
+  Saturday: 10:00-18:00
+
+
+PLACE: Ugly Mugs (ID: 75)
+--------------------------------------------------
+TEXT HOURS (from places table):
+  No text hours available
+
+STRUCTURED HOURS (from opening_hours table):
+  Sunday: 12:00-17:00
+  Friday: 12:00-17:00
+  Saturday: 12:00-17:00
+
+MISSING DAYS: Monday, Tuesday, Wednesday, Thursday
+
+
+PLACE: Unicorn (ID: 76)
+--------------------------------------------------
+TEXT HOURS (from places table):
+  No text hours available
+
+STRUCTURED HOURS (from opening_hours table):
+  Sunday: 12:00-16:00
+  Friday: 12:00-16:00
+  Saturday: 12:00-16:00
+
+MISSING DAYS: Monday, Tuesday, Wednesday, Thursday
+
+
+PLACE: Victoria & George  (ID: 77)
+--------------------------------------------------
+TEXT HOURS (from places table):
+  No text hours available
+
+STRUCTURED HOURS (from opening_hours table):
+  Sunday: 11:00-17:00
+  Wednesday: 11:00-17:00
+  Friday: 11:00-17:00
+  Saturday: 11:00-17:00
+
+MISSING DAYS: Monday, Tuesday, Thursday
+
+
+PLACE: Vintage Wool Rugs (ID: 78)
+--------------------------------------------------
+TEXT HOURS (from places table):
+  No text hours available
+
+STRUCTURED HOURS (from opening_hours table):
+  Sunday: 10:00-17:00
+  Monday: 10:00-17:00
+  Tuesday: 10:00-17:00
+  Wednesday: 10:00-17:00
+  Thursday: 10:00-17:00
+  Saturday: 10:00-17:00
+
+MISSING DAYS: Friday
+
+
+PLACE: Yellow Souls (ID: 79)
+--------------------------------------------------
+TEXT HOURS (from places table):
+  No text hours available
+
+STRUCTURED HOURS (from opening_hours table):
+  Sunday: 12:00-18:00
+  Wednesday: 12:00-17:00
+  Friday: 12:00-17:00
+  Saturday: 12:00-18:00
+
+MISSING DAYS: Monday, Tuesday, Thursday
+
+
+PLACE: Young  (ID: 80)
+--------------------------------------------------
+TEXT HOURS (from places table):
+  Monday: Closed
+  Tuesday: Closed
+  Wednesday: Closed
+  Thursday: Closed
+  Friday: 14:00-17:00
+  Saturday: Closed
+  Sunday: 14:00-17:00
+
+STRUCTURED HOURS (from opening_hours table):
+  Sunday: 14:00-17:00
+  Monday: Closed
+  Tuesday: Closed
+  Wednesday: Closed
+  Thursday: Closed
+  Friday: 14:00-17:00
+  Saturday: Closed
+
+
+PLACE: Stockbridge Vintage Records (ID: 4)
+--------------------------------------------------
+TEXT HOURS (from places table):
+  Mon-Sat: 11am-6pm, Sun: 12pm-5pm
+
+STRUCTURED HOURS (from opening_hours table):
+  Sunday: Closed
+  Monday: 9:00-17:00
+  Tuesday: 9:00-17:00
+  Wednesday: 9:00-17:00
+  Thursday: 9:00-17:00
+  Friday: 9:00-17:00
+  Saturday: 10:00-16:00
+
+
+PLACE: The Old Town Antiques (ID: 1)
+--------------------------------------------------
+TEXT HOURS (from places table):
+  Mon-Sat: 10am-5pm, Sun: 12pm-4pm
+
+STRUCTURED HOURS (from opening_hours table):
+  Sunday: Closed
+  Monday: 9:00-17:00
+  Tuesday: 9:00-17:00
+  Wednesday: 9:00-17:00
+  Thursday: 9:00-17:00
+  Friday: 9:00-17:00
+  Saturday: 10:00-16:00
+
+
+PLACE: Pie In The Sky (ID: 61)
+--------------------------------------------------
+TEXT HOURS (from places table):
+  No text hours available
+
+STRUCTURED HOURS (from opening_hours table):
+  Sunday: 10:00-18:00
+  Monday: 10:00-18:00
+  Tuesday: 10:00-18:00
+  Wednesday: 10:00-18:00
+  Thursday: 10:00-18:00
+  Friday: 10:00-18:00
+  Saturday: 10:00-18:00
+
+
+PLACE: Bowerbird Antiques (ID: 22)
+--------------------------------------------------
+TEXT HOURS (from places table):
+  No text hours available
+
+STRUCTURED HOURS (from opening_hours table):
+  Friday: 10:00-17:00
+
+MISSING DAYS: Sunday, Monday, Tuesday, Wednesday, Thursday, Saturday
+
+
+PLACE: Edinburgh Auction Rooms (ID: 2)
+--------------------------------------------------
+TEXT HOURS (from places table):
+  Viewing: Tue-Fri: 10am-4pm, Auctions: Saturdays from 11am
+
+STRUCTURED HOURS (from opening_hours table):
+  Sunday: Closed
+  Monday: 9:00-17:00
+  Tuesday: 9:00-17:00
+  Wednesday: 9:00-17:00
+  Thursday: 9:00-17:00
+  Friday: 9:00-17:00
+  Saturday: 10:00-16:00
+
+
+PLACE: Edinburgh Books (ID: 31)
+--------------------------------------------------
+TEXT HOURS (from places table):
+  No text hours available
+
+STRUCTURED HOURS (from opening_hours table):
+  Sunday: 10:00-18:00
+  Monday: 10:00-18:00
+  Tuesday: 10:00-18:00
+  Wednesday: 10:00-18:00
+  Thursday: 10:00-18:00
+  Friday: 10:00-18:00
+  Saturday: 10:00-18:00
+
+

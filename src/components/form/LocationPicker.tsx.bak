@@ -1,0 +1,207 @@
+'use client';
+
+import React, { useState, useEffect } from 'react';
+import { GoogleMap, LoadScript, Marker } from '@react-google-maps/api';
+import { isInEdinburghArea } from '@/lib/validation-utils';
+
+interface LocationPickerProps {
+  lat: number | string;
+  lng: number | string;
+  address?: string;
+  onChange: (lat: number, lng: number) => void;
+  error?: string | null;
+}
+
+// Default Edinburgh center coordinates
+const edinburghCenter = {
+  lat: 55.9533,
+  lng: -3.1883
+};
+
+const mapContainerStyle = {
+  width: '100%',
+  height: '400px',
+  borderRadius: '0.5rem',
+};
+
+export default function LocationPicker({
+  lat,
+  lng,
+  address,
+  onChange,
+  error,
+}: LocationPickerProps): React.ReactElement {
+  // Ensure we always work with numbers internally
+  const getNumericValue = (val: string | number): number => {
+    if (typeof val === 'string') {
+      const parsed = parseFloat(val);
+      return isNaN(parsed) ? 55.9533 : parsed; // Default to Edinburgh center if invalid
+    }
+    return val;
+  };
+
+  const [markerPosition, setMarkerPosition] = useState({ 
+    lat: getNumericValue(lat),
+    lng: getNumericValue(lng)
+  });
+  const [mapCenter, setMapCenter] = useState(markerPosition);
+  const [locationError, setLocationError] = useState<string | null | undefined>(error);
+  const [searchInput, setSearchInput] = useState('');
+  const [geocoder, setGeocoder] = useState<google.maps.Geocoder | null>(null);
+
+  // Update position when props change
+  useEffect(() => {
+    // Get numeric values using our helper
+    const numLat = getNumericValue(lat);
+    const numLng = getNumericValue(lng);
+    
+    // Always update with valid numbers
+    setMarkerPosition({ lat: numLat, lng: numLng });
+  }, [lat, lng]);
+  
+  // If address is provided, use it to set the location
+  useEffect(() => {
+    if (address && geocoder) {
+      geocodeAddress(address);
+    }
+  }, [address, geocoder]);
+
+  // Validate location is in Edinburgh
+  useEffect(() => {
+    const latNum = typeof markerPosition.lat === 'string' ? parseFloat(markerPosition.lat) : markerPosition.lat;
+    const lngNum = typeof markerPosition.lng === 'string' ? parseFloat(markerPosition.lng) : markerPosition.lng;
+    
+    if (!isInEdinburghArea(latNum, lngNum)) {
+      setLocationError('Location appears to be outside Edinburgh area');
+    } else {
+      setLocationError(undefined);
+    }
+  }, [markerPosition]);
+
+  const handleMapClick = (e: google.maps.MapMouseEvent) => {
+    if (!e.latLng) return;
+
+    const newPosition = {
+      lat: e.latLng.lat(),
+      lng: e.latLng.lng(),
+    };
+    
+    setMarkerPosition(newPosition);
+    onChange(newPosition.lat, newPosition.lng);
+  };
+
+  const handleMarkerDragEnd = (e: google.maps.MapMouseEvent) => {
+    if (!e.latLng) return;
+
+    const newPosition = {
+      lat: e.latLng.lat(),
+      lng: e.latLng.lng(),
+    };
+    
+    setMarkerPosition(newPosition);
+    onChange(newPosition.lat, newPosition.lng);
+  };
+
+  // Extract postcode from address
+  const extractPostcode = (address: string): string => {
+    // UK postcode regex pattern
+    const postcodeRegex = /[A-Z]{1,2}[0-9][A-Z0-9]? ?[0-9][A-Z]{2}/i;
+    const match = address.match(postcodeRegex);
+    return match ? match[0] : '';
+  };
+
+  // Geocode an address string
+  // Manual geocoding workaround since we don't have a valid API key
+  const geocodeAddress = (addressString: string) => {
+    if (!addressString.trim()) return;
+    
+    // For now, since we can't use Google's geocoding API without a valid key,
+    // we'll set a position near the center of Edinburgh
+    // In a real implementation, this would actually geocode the address
+    
+    const newPosition = {
+      lat: 55.9533,
+      lng: -3.1883
+    };
+    
+    setMarkerPosition(newPosition);
+    setMapCenter(newPosition);
+    onChange(newPosition.lat, newPosition.lng);
+    setSearchInput(addressString);
+    
+    // Show helpful message to the user
+    setLocationError('For precise location, please drag the marker to the exact shop location');
+  };
+
+  const handleSearchLocation = (e: React.FormEvent) => {
+    e.preventDefault();
+    geocodeAddress(searchInput);
+  };
+
+  // Safely initialize the geocoder when Google Maps loads
+  const handleGoogleLoad = () => {
+    if (window.google && window.google.maps) {
+      setGeocoder(new window.google.maps.Geocoder());
+    }
+  };
+
+  return (
+    <div className="location-picker">
+      <div className="mb-4">
+        <form onSubmit={handleSearchLocation} className="flex gap-2">
+          <input
+            type="text"
+            className="flex-1 px-3 py-2 border border-gray-300 rounded-md focus:border-edinburgh-blue focus:ring focus:ring-edinburgh-blue/20"
+            placeholder="Search for address in Edinburgh"
+            value={searchInput}
+            onChange={(e) => setSearchInput(e.target.value)}
+          />
+          <button
+            type="submit"
+            className="px-4 py-2 bg-edinburgh-blue text-white rounded-md hover:bg-edinburgh-blue/90"
+          >
+            Find
+          </button>
+        </form>
+        <p className="text-sm text-gray-500 mt-1">
+          Search for an address or click/drag on the map to set location
+        </p>
+      </div>
+
+      {locationError && (
+        <div className="mb-4 p-3 bg-yellow-50 text-yellow-800 border border-yellow-200 rounded-md">
+          {locationError}
+        </div>
+      )}
+
+      <LoadScript
+        googleMapsApiKey=""
+        onLoad={handleGoogleLoad}
+        loadingElement={<div className="h-96 bg-gray-100 flex items-center justify-center">Loading map...</div>}
+      >
+        <GoogleMap
+          mapContainerStyle={mapContainerStyle}
+          center={mapCenter}
+          zoom={14}
+          onClick={handleMapClick}
+        >
+          <Marker
+            position={markerPosition}
+            draggable={true}
+            onDragEnd={handleMarkerDragEnd}
+          />
+        </GoogleMap>
+      </LoadScript>
+
+      {/* Latitude and longitude fields are now hidden from the user interface */}
+      <input type="hidden" value={markerPosition.lat} />
+      <input type="hidden" value={markerPosition.lng} />
+
+      <div className="mt-4 text-sm text-gray-500">
+        <p>
+          <span className="font-medium">Tip:</span> For the most accurate placement, zoom in and fine-tune the marker position
+        </p>
+      </div>
+    </div>
+  );
+}

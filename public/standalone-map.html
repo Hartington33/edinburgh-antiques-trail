@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Edinburgh Antiques Map - Standalone</title>
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f5f5f5;
+    }
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+    .header {
+      margin-bottom: 20px;
+    }
+    .header h1 {
+      color: #1D3557;
+      margin-bottom: 8px;
+    }
+    .map-container {
+      width: 100%;
+      height: 70vh;
+      background-color: #e9e9e9;
+      border-radius: 8px;
+      overflow: hidden;
+      margin-bottom: 20px;
+    }
+    .controls {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      margin-bottom: 20px;
+      background-color: white;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    }
+    .control-group {
+      display: flex;
+      flex-direction: column;
+    }
+    .control-group label {
+      margin-bottom: 8px;
+      font-weight: 500;
+    }
+    .control-group select {
+      padding: 8px;
+      border-radius: 4px;
+      border: 1px solid #ddd;
+    }
+    .locations-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 20px;
+      margin-top: 20px;
+    }
+    .location-card {
+      background-color: white;
+      border-radius: 8px;
+      padding: 16px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    }
+    .location-title {
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+    .location-type {
+      color: #666;
+      font-size: 14px;
+    }
+    .price-range {
+      display: inline-block;
+      background-color: #e1e1e1;
+      padding: 4px 8px;
+      border-radius: 4px;
+      font-size: 12px;
+      margin-top: 8px;
+    }
+    @media (max-width: 768px) {
+      .controls {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>Edinburgh Antiques Map</h1>
+      <p>Explore antique shops, auction houses, and more throughout Edinburgh</p>
+    </div>
+
+    <div class="controls">
+      <div class="control-group">
+        <label for="typeFilter">Filter by Category</label>
+        <select id="typeFilter">
+          <option value="">All Categories</option>
+          <option value="1">Antique Shop</option>
+          <option value="2">Auction House</option>
+          <option value="3">Book Shop</option>
+          <option value="4">Record Shop</option>
+          <option value="5">Vintage Clothing</option>
+          <option value="6">Antique Fair</option>
+        </select>
+      </div>
+      <div class="control-group">
+        <label for="priceFilter">Filter by Price Range</label>
+        <select id="priceFilter">
+          <option value="">All Price Ranges</option>
+          <option value="£">£ (Budget)</option>
+          <option value="££">££ (Mid-range)</option>
+          <option value="£££">£££ (High-end)</option>
+          <option value="££££">££££ (Luxury)</option>
+        </select>
+      </div>
+    </div>
+
+    <div id="map" class="map-container"></div>
+
+    <div class="locations-list" id="locationsList">
+      <!-- Locations will be inserted here -->
+    </div>
+  </div>
+
+  <script>
+    // Edinburgh center coordinates
+    const edinburghCenter = { lat: 55.9533, lng: -3.1883 };
+    
+    // Sample data for places
+    const places = [
+      {
+        id: 1,
+        name: "Antique Edinburgh",
+        address: "123 Royal Mile, Edinburgh",
+        lat: 55.9502,
+        lng: -3.1860,
+        type_id: 1,
+        type_name: "Antique Shop",
+        price_range: "££"
+      },
+      {
+        id: 2,
+        name: "Old Town Books",
+        address: "45 Cockburn Street, Edinburgh",
+        lat: 55.9509,
+        lng: -3.1898,
+        type_id: 3,
+        type_name: "Book Shop",
+        price_range: "£"
+      },
+      {
+        id: 3,
+        name: "Royal Mile Auctions",
+        address: "78 High Street, Edinburgh",
+        lat: 55.9495,
+        lng: -3.1880,
+        type_id: 2,
+        type_name: "Auction House",
+        price_range: "£££"
+      },
+      {
+        id: 4,
+        name: "Vintage Threads",
+        address: "12 Grassmarket, Edinburgh",
+        lat: 55.9470,
+        lng: -3.1965,
+        type_id: 5,
+        type_name: "Vintage Clothing",
+        price_range: "££"
+      },
+      {
+        id: 5,
+        name: "Castle Antiques",
+        address: "34 Lawnmarket, Edinburgh",
+        lat: 55.9489,
+        lng: -3.1950,
+        type_id: 1,
+        type_name: "Antique Shop",
+        price_range: "£££"
+      },
+      {
+        id: 6,
+        name: "Grassmarket Records",
+        address: "56 West Port, Edinburgh",
+        lat: 55.9465,
+        lng: -3.1980,
+        type_id: 4,
+        type_name: "Record Shop",
+        price_range: "££"
+      },
+      {
+        id: 7,
+        name: "Georgian Treasures",
+        address: "23 George Street, Edinburgh",
+        lat: 55.9535,
+        lng: -3.1995,
+        type_id: 1,
+        type_name: "Antique Shop",
+        price_range: "££££"
+      },
+      {
+        id: 8,
+        name: "New Town Rare Books",
+        address: "89 Queen Street, Edinburgh",
+        lat: 55.9545,
+        lng: -3.2020,
+        type_id: 3,
+        type_name: "Book Shop",
+        price_range: "£££"
+      },
+      {
+        id: 9,
+        name: "Stockbridge Vintage",
+        address: "45 St Stephen Street, Edinburgh",
+        lat: 55.9575,
+        lng: -3.2095,
+        type_id: 5,
+        type_name: "Vintage Clothing",
+        price_range: "£"
+      },
+      {
+        id: 10,
+        name: "Edinburgh Antique Fair",
+        address: "Meadowbank Stadium, Edinburgh",
+        lat: 55.9595,
+        lng: -3.1600,
+        type_id: 6,
+        type_name: "Antique Fair",
+        price_range: "££"
+      }
+    ];
+    
+    // Map markers and icon colors
+    const typeColors = {
+      1: "#FF4136", // Antique Shop (Red)
+      2: "#0074D9", // Auction House (Blue)
+      3: "#2ECC40", // Book Shop (Green)
+      4: "#B10DC9", // Record Shop (Purple)
+      5: "#FFDC00", // Vintage Clothing (Yellow)
+      6: "#FF851B"  // Antique Fair (Orange)
+    };
+    
+    // Type names for reference
+    const typeNames = {
+      1: "Antique Shop",
+      2: "Auction House",
+      3: "Book Shop",
+      4: "Record Shop",
+      5: "Vintage Clothing",
+      6: "Antique Fair"
+    };
+
+    // References to DOM elements
+    const typeFilterEl = document.getElementById('typeFilter');
+    const priceFilterEl = document.getElementById('priceFilter');
+    const locationsListEl = document.getElementById('locationsList');
+    
+    // Filter state
+    let filters = {
+      type_id: '',
+      price_range: ''
+    };
+    
+    // Map and markers references
+    let map;
+    let markers = [];
+    let infoWindow;
+
+    // Initialize Google Maps
+    function initMap() {
+      map = new google.maps.Map(document.getElementById('map'), {
+        center: edinburghCenter,
+        zoom: 13,
+        styles: [
+          {
+            featureType: "poi",
+            elementType: "labels",
+            stylers: [{ visibility: "off" }]
+          }
+        ],
+        mapTypeControl: false,
+        streetViewControl: false
+      });
+      
+      infoWindow = new google.maps.InfoWindow();
+      
+      // Apply initial filters
+      applyFilters();
+      
+      // Set up filter change handlers
+      typeFilterEl.addEventListener('change', handleFilterChange);
+      priceFilterEl.addEventListener('change', handleFilterChange);
+    }
+    
+    // Filter change handler
+    function handleFilterChange() {
+      filters.type_id = typeFilterEl.value;
+      filters.price_range = priceFilterEl.value;
+      applyFilters();
+    }
+    
+    // Apply filters to markers and list
+    function applyFilters() {
+      // Clear existing markers
+      clearMarkers();
+      
+      // Filter places
+      const filteredPlaces = places.filter(place => {
+        if (filters.type_id && place.type_id.toString() !== filters.type_id) return false;
+        if (filters.price_range && place.price_range !== filters.price_range) return false;
+        return true;
+      });
+      
+      // Add markers for filtered places
+      addMarkers(filteredPlaces);
+      
+      // Update locations list
+      updateLocationsList(filteredPlaces);
+    }
+    
+    // Clear all markers from the map
+    function clearMarkers() {
+      markers.forEach(marker => marker.setMap(null));
+      markers = [];
+    }
+    
+    // Add markers for given places
+    function addMarkers(places) {
+      places.forEach(place => {
+        const position = { lat: place.lat, lng: place.lng };
+        
+        // Create custom SVG marker
+        const color = typeColors[place.type_id] || "#999";
+        const svgMarker = {
+          path: google.maps.SymbolPath.CIRCLE,
+          fillColor: color,
+          fillOpacity: 1,
+          strokeWeight: 2,
+          strokeColor: '#ffffff',
+          scale: 10
+        };
+        
+        const marker = new google.maps.Marker({
+          position: position,
+          map: map,
+          icon: svgMarker,
+          title: place.name
+        });
+        
+        // Add click handler
+        marker.addListener('click', () => {
+          const content = `
+            <div style="max-width: 200px; padding: 8px;">
+              <h3 style="margin: 0 0 8px; font-size: 16px;">${place.name}</h3>
+              <p style="margin: 0 0 8px; font-size: 14px; color: #666;">${place.type_name}</p>
+              <p style="margin: 0 0 8px; font-size: 14px;">${place.address}</p>
+              ${place.price_range ? `<p style="margin: 0; font-size: 14px;">Price Range: ${place.price_range}</p>` : ''}
+            </div>
+          `;
+          
+          infoWindow.setContent(content);
+          infoWindow.open(map, marker);
+        });
+        
+        markers.push(marker);
+      });
+    }
+    
+    // Update locations list
+    function updateLocationsList(places) {
+      locationsListEl.innerHTML = '';
+      
+      if (places.length === 0) {
+        locationsListEl.innerHTML = '<p>No locations match your filters</p>';
+        return;
+      }
+      
+      places.forEach(place => {
+        const card = document.createElement('div');
+        card.className = 'location-card';
+        
+        const html = `
+          <div class="location-title">${place.name}</div>
+          <div class="location-type">${place.type_name}</div>
+          <div class="location-address">${place.address}</div>
+          ${place.price_range ? `<div class="price-range">${place.price_range}</div>` : ''}
+        `;
+        
+        card.innerHTML = html;
+        
+        // Add click handler to center map on this location
+        card.addEventListener('click', () => {
+          map.setCenter({ lat: place.lat, lng: place.lng });
+          map.setZoom(16);
+          
+          // Find and click the marker
+          const marker = markers.find(m => 
+            m.getPosition().lat() === place.lat && 
+            m.getPosition().lng() === place.lng
+          );
+          
+          if (marker) {
+            google.maps.event.trigger(marker, 'click');
+          }
+        });
+        
+        locationsListEl.appendChild(card);
+      });
+    }
+    
+    // Time formatter - properly formats times without leading zeros
+    function formatTimeFor12Hour(time24) {
+      if (!time24 || !time24.includes(':')) {
+        return time24 || '';
+      }
+      
+      try {
+        // Parse hours and minutes
+        const [hoursStr, minutesStr] = time24.split(':');
+        const hours = parseInt(hoursStr, 10);
+        const minutes = parseInt(minutesStr, 10);
+        
+        // Convert to 12-hour format
+        const period = hours >= 12 ? 'PM' : 'AM';
+        const hours12 = hours % 12 || 12; // 0 should be displayed as 12
+        
+        const minutesPart = minutes > 0 ? `:${minutes.toString().padStart(2, '0')}` : '';
+        return `${hours12}${minutesPart}${period}`;
+      } catch (error) {
+        return time24;
+      }
+    }
+  </script>
+  
+  <!-- Google Maps API -->
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAQ0N-wuHgiYSgdufORprdn2H1GoGJ-vdY&callback=initMap" async defer></script>
+</body>
+</html>

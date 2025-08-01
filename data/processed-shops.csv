@@ -1,0 +1,65 @@
+name,address,postcode,phone,email,website,description,specialties,type_name,price_range,opening_hours_mon,opening_hours_tue,opening_hours_wed,opening_hours_thu,opening_hours_fri,opening_hours_sat,opening_hours_sun,is_appointment_only
+Alan Day,25 Moray Place,"EH1 2HG ",,,,,Upmarket Chinese,Antique � Appointment Only,££,10:00-17:00,10:00-17:00,10:00-17:00,10:00-17:00,10:00-17:00,10:00-17:00,10:00-17:00,true
+Anthony Woodd,4 Dundas Street,"EH3 6HZ ",,,,,Upmarket,"Antique  ",££,11:00-17:00,11:00-17:00,11:00-17:00,11:00-17:00,11:00-17:00,11:00-16:00,11:00-16:00,false
+Aquarius,3 Spittal Street,EH3 9DY,,,,,Mixed,"Antique ",££,11:00-18:00,11:00-18:00,11:00-18:00,11:00-18:00,11:00-18:00,11:00-18:00,11:00-18:00,false
+Armchair Books,"72 West Port ",EH1 2LE,,,,,Books,Books,££,01:00-05:00,01:00-05:00,01:00-05:00,01:00-05:00,10:00-18:00,10:00-18:00,10:00-18:00,false
+Bowerbird,26 Bruntsfield Avenue,"EH3 6DA ",,,,,,"Antique ",££,,,,,10:00-17:00,,,
+Bowerbird Antiques,26 Bruntsfield Avenue,EH10 4EW,,,,,,"Antique ",££,,,,,10:00-17:00,,,
+Cabaret,137 West Port,"EH3 9DP ",,,,,Books,Books,££,10:00-17:00,10:00-17:00,10:00-17:00,10:00-17:00,10:00-17:00,10:00-17:00,10:00-17:00,false
+Carnivale Vintage,51 Bread Street,EH3 9AH,,,,,Clothing,Clothes,££,11:00-18:00,11:00-18:00,11:00-18:00,11:00-18:00,11:00-18:00,11:00-18:00,11:00-18:00,false
+Cavanagh�s Antiques,49 Cockburn Street,"EH1 1BS ",,,,,,"Antique ",££,,,,,11:00-17:00,11:00-17:00,11:00-17:00,
+Cookie,29a Cockburn Street,EH1 1BP,,,,,Clothing (Women),Clothes,££,10:00-17:00,10:00-17:00,10:00-17:00,10:00-17:00,10:00-17:00,10:00-17:00,10:00-17:00,false
+Courtyard,108 Causwayside,"EH9 1PU ",,,,,Mixed,"Antique ",££,10:00-16:00,10:00-16:00,10:00-16:00,10:00-16:00,10:00-16:00,10:00-16:00,10:00-16:00,false
+Drennan Sturrock,28 London Road,"EH3 6NA ",,,,,Upmarket Furniture,Furniture,££,,,,,,,,false
+Duncan & Reid,5 Tanfield Inverleith Row,EH3 5DA,,,,,Antiques Books,Books,££,,,11:00-16:00,,,,,false
+Edinburgh Antique Centre,70 Bangor Road,"EH6 5JU ",,,,,Upmarket,"Antique ",££,10:00-17:00,10:00-17:00,10:00-17:00,10:00-17:00,10:00-17:00,10:00-17:00,10:00-17:00,false
+Edinburgh Books,145 West Port,"EH3 9DP ",,,,,Books,Books,££,10:00-18:00,10:00-18:00,10:00-18:00,10:00-18:00,10:00-18:00,10:00-18:00,10:00-18:00,false
+Edinburgh Collectables,16 Crighton Place,EH7 4NY,,,,,Retro (New ?),Collectables,££,,,11:00-18:00,,11:00-18:00,11:00-18:00,11:00-18:00,false
+Elaine�s Vintage Clothing,55 St Stephen St,,,,,,Clothing,Clothes,££,01:00-06:00,01:00-06:00,01:00-06:00,01:00-06:00,01:00-06:00,01:00-06:00,01:00-06:00,false
+Emporium 62,62 Home St,EH3 9NA,,,,,Mixed,"Antique ",££,11:00-18:00,11:00-18:00,11:00-18:00,11:00-18:00,11:00-18:00,11:00-18:00,11:00-18:00,false
+Epoca,365 Leith Walk,EH6 8SD,,,,,Clothing,Clothes,££,12:00-18:00,12:00-18:00,12:00-18:00,12:00-18:00,12:00-18:00,12:00-18:00,12:00-18:00,false
+Folly,208 Leith Walk,"EH6 5EQ ",,,,,,"Antique ",££,10:00-17:00,10:00-17:00,10:00-17:00,10:00-17:00,10:00-17:00,10:00-17:00,10:00-17:00,
+"George Pirie ",22 Howe Street,"EH3 6TG ",,,,,Paintings,Art,££,10:00-18:00,10:00-18:00,10:00-18:00,10:00-18:00,10:00-18:00,10:00-18:00,10:00-18:00,false
+Georgian Antiques,10 Pattison Street,EH6 7HF,,,,,Large Warehouse,Furniture,££,09:00-17:00,09:00-17:00,09:00-17:00,09:00-17:00,09:00-17:00,10:00-14:00,10:00-14:00,false
+Godiva,9 West Port,EH1 2JA,,,,,,"Antique ",££,11:00-18:00,11:00-18:00,11:00-18:00,11:00-18:00,11:00-18:00,11:00-18:00,11:00-18:00,
+Goodwins,106 Rose Street,EH2 3JF,,,,,"Jewellery ","Antique ",££,,10:00-16:00,10:00-16:00,10:00-16:00,10:00-16:00,10:00-16:00,10:00-16:00,false
+Goodwins,15 Queensferry Road,EH2 4QW,,,,,"Jewellery ","Antique ",££,,10:00-16:00,10:00-16:00,10:00-16:00,10:00-16:00,10:00-16:00,10:00-16:00,false
+Grange Clocks,7 Summerhall Place,EH9 1QE,,,,,,"Antique ",££,,09:00-17:00,,09:00-17:00,09:00-17:00,,,
+Harlequin Antiques,30 Bruntsfield Place,EH10 4HJ,,,,,Mixed,"Antique ",££,10:00-17:00,10:00-17:00,10:00-17:00,10:00-17:00,10:00-17:00,10:00-17:00,10:00-17:00,false
+Herman Brown,151 West Port,EH3 9PD,,,,,Clothes (Women),Clothes,££,,12:00-18:00,12:00-18:00,12:00-18:00,12:00-18:00,12:00-18:00,12:00-18:00,false
+Inverleith Saleroom,22 Montague Terrace,EH3 5QR,,,,,Furniture,Furniture,££,11:00-16:00,,11:00-16:00,,11:00-16:00,11:00-16:00,11:00-16:00,false
+Islander,95 West Bow,"EH1 2JP ",,,,,,"Antique ",££,11:00-16:00,11:00-16:00,11:00-16:00,11:00-16:00,11:00-16:00,11:00-16:00,11:00-16:00,
+James Scott,43a Dundas Street,"EH3 6QQ ",,,,,Mixed,"Antique ",££,10:00-17:00,10:00-17:00,10:00-17:00,10:00-17:00,10:00-17:00,10:00-17:00,10:00-17:00,false
+Joey D,54 Broughton Streen,EH1 3SA,,,,,Clothing (Women),Clothes,££,11:00-18:00,11:00-18:00,11:00-18:00,11:00-18:00,11:00-18:00,11:00-18:00,11:00-18:00,false
+John Love,88 Jane Street,EH6 5HG,,,,,,"Antique ",££,10:00-17:00,10:00-17:00,10:00-17:00,10:00-17:00,10:00-17:00,10:00-17:00,10:00-17:00,
+Joseph Bonnar,72 Thistle Street,EH2 1EN,,,,,"Jewellery ","Antique ",££,,11:00-17:00,11:00-17:00,11:00-17:00,11:00-17:00,11:00-17:00,11:00-17:00,false
+Lifestyle,25 Mayfield Gardens,EH9 2BX,,,,,Furniture,Furniture,££,09:00-17:00,09:00-17:00,09:00-17:00,09:00-17:00,09:00-17:00,,,false
+Little Blue Door,25 Candlemaker Row,EH1 2QG,,,,,Clothes,Clothes,££,,,12:00-18:00,,12:00-18:00,12:00-18:00,12:00-18:00,false
+Martinez,17 Brandon Terrace,"EH3 5DZ ",,,,,Clocks Watches Lighting Jewellery,"Antique ",££,11:00-17:00,11:00-17:00,11:00-14:00,11:00-17:00,11:00-17:00,,,false
+McNaughtan�s Bookshop,4a Haddington Place,"EH7 4AE ",,,,,,Books,££,,11:00-17:00,11:00-17:00,11:00-17:00,11:00-17:00,11:00-17:00,11:00-17:00,
+Miss Bizio Couture,41 St Stephen Street,EH3 5AH,,,,,Clothes,Clothes,££,10:00-17:00,10:00-17:00,10:00-17:00,10:00-17:00,10:00-17:00,10:00-17:00,10:00-17:00,false
+Mr Purves,59 St Stephen Place,EH3 5AH,,,,,Lighting,Furniture,££,10:00-16:00,10:00-16:00,10:00-16:00,10:00-16:00,10:00-16:00,10:00-16:00,10:00-16:00,false
+Nomads Tent,21 St Leonard�s Lane,EH8 9SH,,,,,,"Antique ",££,10:00-17:00,10:00-17:00,10:00-17:00,10:00-17:00,10:00-17:00,10:00-17:00,10:00-17:00,
+"Pascal ",20 Albert Place,EH7 5HN,,,,,Clothing,Clothes,££,,,01:00-05:00,,01:00-05:00,01:00-05:00,01:00-05:00,false
+"Patrick Buckley ",108 Causwayside,EH9 1QG,,,,,Furniture,"Antique ",££,11:00-17:00,11:00-17:00,11:00-17:00,11:00-17:00,11:00-17:00,11:00-17:00,11:00-17:00,false
+Persian Rug Village,34 Morningside Road,EH10 4DA,,,,,Rugs,Furniture,££,10:00-18:00,10:00-18:00,10:00-18:00,10:00-18:00,10:00-18:00,10:00-18:00,10:00-18:00,false
+Pie In The Sky,47 Cockburn Street,EH1 1BS,,,,,,"Antique ",££,10:00-18:00,10:00-18:00,10:00-18:00,10:00-18:00,10:00-18:00,10:00-18:00,10:00-18:00,
+"Quadrant ",47 Dundas Street,"EH3 6RS ",,,,,Mixed,"Antique ",££,,,,,02:00-05:00,10:00-18:00,10:00-18:00,false
+Retro Morrison Street,190 Morrison Street,EH3 8EB,,,,,Mixed,"Antique ",££,10:00-16:00,10:00-16:00,10:00-16:00,10:00-16:00,10:00-16:00,10:00-16:00,10:00-16:00,false
+Retrospect,58 Clerk Street,EH8 9JB,,,,,Retro,Collectables,££,10:00-18:00,10:00-18:00,12:00-17:00,10:00-18:00,10:00-18:00,10:00-18:00,10:00-18:00,false
+Royal Mile Curios,363 High Street,"EH1 1PW ",,,,,Jewellery,"Antique ",££,,10:00-17:00,10:00-17:00,10:00-17:00,10:00-17:00,10:00-17:00,10:00-17:00,false
+Royal Mile Gallery,272 Canongate,"EH8 8AA ",,,,,Prints & Maps,Furniture,££,11:00-17:00,11:00-17:00,11:00-17:00,11:00-17:00,11:00-17:00,11:00-17:00,11:00-17:00,false
+Simon Scott,33 Roseburn Terrace,EH12 5NQ,,,,,,"Antique ",££,10:00-18:00,10:00-18:00,10:00-18:00,10:00-18:00,10:00-18:00,,,
+Still Life,Candlemaker,"EH1 2QE ",,,,,Mixed,"Antique ",££,12:00-17:00,12:00-17:00,12:00-17:00,12:00-17:00,12:00-17:00,12:00-17:00,12:00-17:00,false
+Stock Xchange,5 Young Street,EH2 4HU,,,,,Clothing (Women),Clothes,££,,11:00-17:00,11:00-17:00,11:00-17:00,11:00-17:00,11:00-17:00,11:00-17:00,false
+Theodore David,25 Montagu Terrace,EH3 5QR,,,,,Jewellery coins medals,"Antique ",££,,10:00-16:00,10:00-16:00,10:00-16:00,10:00-16:00,11:00-16:00,11:00-16:00,false
+Those Were The Days,28 St Stephen Street,EH3 5AL,,,,,Clothing,Clothes,££,,,,,11:00-17:00,11:00-17:00,11:00-17:00,false
+Those Were The Days � Bridal,26 St Stephen Street,EH3 5AL,,,,,Bridal,Clothes,££,,,,,10:00-17:00,10:00-17:00,10:00-17:00,false
+Tills Bookshop,1 Hope Park Crescent,EH8 9NA,,,,,Books,Books,££,10:00-18:00,10:00-18:00,10:00-18:00,10:00-18:00,10:00-18:00,10:00-17:00,10:00-17:00,false
+Tills Bookshop,1 Hope Park Crescent,EH8 9NA,,,,,Books,Books,££,10:00-18:00,10:00-18:00,10:00-18:00,10:00-18:00,10:00-18:00,10:00-18:00,10:00-18:00,false
+Ugly Mugs,8 Canning Street Lane,EH3 8ER,,,,,Clothing,Clothes,££,,,,,12:00-17:00,12:00-17:00,12:00-17:00,false
+Unicorn,65 Dundas Street,"EH3 6RS ",,,,,Mixed,"Antique ",££,,,,,12:00-16:00,12:00-16:00,12:00-16:00,false
+"Victoria & George ",96 Bruntsfield Place,EH10 4ES,,,,,Furniture,Furniture,££,,,11:00-17:00,,11:00-17:00,11:00-17:00,11:00-17:00,false
+Vintage Wool Rugs,113 Newington Road,EH9 1QW,,,,,Rugs,Furniture,££,10:00-17:00,10:00-17:00,10:00-17:00,10:00-17:00,,10:00-17:00,10:00-17:00,false
+Yellow Souls,10 Croall Place,EH7 4LT,,,,,Clothing,Clothes,££,,,12:00-17:00,,12:00-17:00,12:00-18:00,12:00-18:00,false
+"Young ",12 Bruntsfield Place,"EH10 4HN ",,,,,,"Antique ",££,,,,,02:00-05:00,02:00-05:00,02:00-05:00,

@@ -1,0 +1,5 @@
+.specialty-filter-container .p-4 {
+  /* Ensure consistent styling for the filter box */
+  max-height: 400px;
+  overflow: auto;
+}

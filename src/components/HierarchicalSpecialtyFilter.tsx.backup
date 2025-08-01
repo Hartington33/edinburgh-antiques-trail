@@ -1,0 +1,641 @@
+'use client';
+
+import { useState, useEffect, useRef } from 'react';
+
+interface Specialty {
+  id: number;
+  name: string;
+  description: string;
+  parent_id: number | null;
+  subcategories?: Specialty[];
+}
+
+interface HierarchicalSpecialtyFilterProps {
+  onChange: (ids: number[]) => void;
+  initialSelectedIds?: number[];
+  placeId?: number;
+  mode?: 'basic' | 'advanced';  // basic shows only main categories, advanced shows subcategories
+}
+
+export default function HierarchicalSpecialtyFilter({
+  onChange,
+  initialSelectedIds = [],
+  placeId,
+  mode = 'basic'
+}: HierarchicalSpecialtyFilterProps) {
+  const [specialties, setSpecialties] = useState<Specialty[]>([]);
+  const [selectedIds, setSelectedIds] = useState<number[]>(initialSelectedIds);
+  const [expandedCategories, setExpandedCategories] = useState<number[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState('');
+  const [mainCategoryClicks, setMainCategoryClicks] = useState<Record<number, number>>({});
+  
+  // Very important: This useEffect syncs the component's internal state with parent component
+  // when initialSelectedIds changes (such as after API load)
+  useEffect(() => {
+    console.log('HierarchicalSpecialtyFilter: initialSelectedIds changed:', initialSelectedIds);
+    setSelectedIds(initialSelectedIds);
+    
+    // Auto-expand categories that have selected subcategories
+    if (initialSelectedIds.length > 0 && specialties.length > 0) {
+      const parentIdsToExpand = new Set<number>();
+      
+      // Find all parent categories that need to be expanded
+      initialSelectedIds.forEach(id => {
+        specialties.forEach(specialty => {
+          if (specialty.subcategories && specialty.subcategories.some(sub => sub.id === id)) {
+            parentIdsToExpand.add(specialty.id);
+          }
+        });
+      });
+      
+      // Update expanded categories
+      if (parentIdsToExpand.size > 0) {
+        setExpandedCategories(prev => {
+          const expanded = [...prev];
+          parentIdsToExpand.forEach(id => {
+            if (!expanded.includes(id)) {
+              expanded.push(id);
+            }
+          });
+          return expanded;
+        });
+      }
+    }
+  }, [initialSelectedIds, specialties]);
+
+  // Fetch specialties - try hierarchical first, then fall back to flat if needed
+  useEffect(() => {
+    const fetchSpecialties = async () => {
+      try {
+        setLoading(true);
+        // First try to get hierarchical data
+        let url = '/api/specialties?hierarchical=true';
+        
+        if (placeId) {
+          url += `&place_id=${placeId}`;
+        }
+        
+        const response = await fetch(url);
+        if (!response.ok) {
+          throw new Error('Failed to fetch specialties');
+        }
+        
+        const data = await response.json();
+        
+        // Check if we got a proper hierarchical structure
+        // If we have empty array or all items have empty subcategories, treat as flat
+        const hasHierarchy = data.length > 0 && data.some(item => 
+          item.subcategories && item.subcategories.length > 0
+        );
+        
+        if (hasHierarchy) {
+          // We have proper hierarchical data
+          setSpecialties(data);
+        } else {
+          // Fallback: if no hierarchy found, create a simple grouping for better UX
+          // Group specialties by first letter for easier selection
+          const groupedSpecialties = groupSpecialtiesByFirstLetter(data);
+          setSpecialties(groupedSpecialties);
+        }
+        
+        setLoading(false);
+      } catch (error) {
+        console.error('Error fetching specialties:', error);
+        setError('Failed to load specialties. Please try again.');
+        setLoading(false);
+      }
+    };
+    
+    fetchSpecialties();
+  }, [placeId]);
+  
+  // Helper function to group specialties by first letter when no hierarchy exists
+  const groupSpecialtiesByFirstLetter = (flatSpecialties: Specialty[]): Specialty[] => {
+    // Sort specialties alphabetically
+    const sorted = [...flatSpecialties].sort((a, b) => a.name.localeCompare(b.name));
+    
+    // Get unique first letters
+    const letters = Array.from(new Set(
+      sorted.map(s => s.name.charAt(0).toUpperCase())
+    )).sort();
+    
+    // Create letter-based groups
+    return letters.map(letter => ({
+      id: -1 * letter.charCodeAt(0), // Generate negative IDs for letter groups to avoid conflicts
+      name: `${letter}`,
+      description: `Specialties starting with ${letter}`,
+      parent_id: null,
+      subcategories: sorted.filter(s => s.name.charAt(0).toUpperCase() === letter)
+    }));
+  };
+
+  // Toggle a main category
+  const toggleMainCategory = (categoryId: number) => {
+    // In basic mode, selecting a main category will select/deselect the main category
+    // In advanced mode, selecting a main category will toggle its expansion state
+    if (mode === 'basic') {
+      toggleSpecialty(categoryId);
+    } else {
+      toggleExpand(categoryId);
+    }
+  };
+
+  // Toggle expand/collapse a category
+  const toggleExpand = (categoryId: number) => {
+    setExpandedCategories(prev => {
+      if (prev.includes(categoryId)) {
+        return prev.filter(id => id !== categoryId);
+      } else {
+        return [...prev, categoryId];
+      }
+    });
+  };
+
+  // Find parent category ID for a subcategory
+  const findParentIdForSubcategory = (specialtyId: number): number | null => {
+    for (const specialty of specialties) {
+      if (specialty.subcategories?.some(sub => sub.id === specialtyId)) {
+        return specialty.id;
+      }
+    }
+    return null;
+  // Create refs to hold the most current state
+  const lastSelectedIdsRef = useRef<number[]>([]);
+
+  // Toggle a specialty selection
+  const toggleSpecialty = (specialtyId: number, isSubcategory: boolean = false) => {
+    // Get main specialty
+    const mainCategory = specialties.find(s => s.id === specialtyId);
+    const isMainCategory = !isSubcategory && mainCategory;
+    
+    if (isMainCategory) {
+      // Handle main category click differently based on click count
+      const clickCount = (mainCategoryClicks[specialtyId] || 0) + 1;
+      
+      if (clickCount === 1) {
+        // First click: Select main category and all subcategories, but keep subcategories hidden
+        const allSubIds = getAllSubcategoryIds(mainCategory);
+        const allIds = [...selectedIds.filter(id => !allSubIds.includes(id) && id !== specialtyId), specialtyId, ...allSubIds];
+        
+        // Set selected IDs and update click count
+        setSelectedIds(allIds);
+        setMainCategoryClicks({...mainCategoryClicks, [specialtyId]: clickCount});
+        
+        // Keep subcategories collapsed
+        setExpandedCategories(prev => prev.filter(id => id !== specialtyId));
+        
+        // Notify parent
+        onChange(allIds);
+      } 
+      else if (clickCount === 2) {
+        // Second click: Keep main category selected, show subcategories but uncheck them
+        const allSubIds = getAllSubcategoryIds(mainCategory);
+        
+        // Only keep the main category selected, remove all subcategories
+        const newIds = selectedIds.filter(id => !allSubIds.includes(id));
+        if (!newIds.includes(specialtyId)) {
+          newIds.push(specialtyId);
+        }
+        
+        setSelectedIds(newIds);
+        setMainCategoryClicks({...mainCategoryClicks, [specialtyId]: clickCount});
+        
+        // Expand to show subcategories
+        if (!expandedCategories.includes(specialtyId)) {
+          setExpandedCategories([...expandedCategories, specialtyId]);
+        }
+        
+        // Notify parent
+        onChange(newIds);
+      }
+      else {
+        // Reset click count and uncheck main category and all subcategories
+        const allSubIds = getAllSubcategoryIds(mainCategory);
+        const newIds = selectedIds.filter(id => !allSubIds.includes(id) && id !== specialtyId);
+        
+        setSelectedIds(newIds);
+        setMainCategoryClicks({...mainCategoryClicks, [specialtyId]: 0});
+        
+        // Collapse subcategories
+        setExpandedCategories(prev => prev.filter(id => id !== specialtyId));
+        
+        // Notify parent
+        onChange(newIds);
+      }
+    } 
+    else {
+      // Handle subcategory toggles
+      setSelectedIds(prev => {
+        let newIds: number[];
+        
+        if (prev.includes(specialtyId)) {
+          // Remove this subcategory
+          newIds = prev.filter(id => id !== specialtyId);
+        } else {
+          // Add this subcategory
+          newIds = [...prev, specialtyId];
+          
+          // If adding a subcategory, ensure its parent category is also selected
+          const parentId = findParentIdForSubcategory(specialtyId);
+          if (parentId && !prev.includes(parentId)) {
+            newIds.push(parentId);
+          }
+        }
+        
+        // Notify parent immediately
+        onChange(newIds);
+        
+        return newIds;
+      });
+    }
+  };
+
+  // Add a function to force-clear all specialties
+  const clearAllSpecialties = () => {
+    setSelectedIds([]);
+    if (onChange) {
+      console.log('FILTER: Force-clearing all specialties');
+      onChange([]);
+    }
+  };
+
+  // Toggle all subcategories of a main category
+  const toggleSubcategories = (specialty: Specialty, selectAll: boolean) => {
+    const allSubIds = getAllSubcategoryIds(specialty);
+    
+    setSelectedIds(prev => {
+      let newIds: number[];
+      
+      if (selectAll) {
+        // Select all subcategories and the main category
+        newIds = [...prev.filter(id => !allSubIds.includes(id))];
+        if (!newIds.includes(specialty.id)) {
+          newIds.push(specialty.id);
+        }
+        allSubIds.forEach(id => {
+          if (!newIds.includes(id)) {
+            newIds.push(id);
+          }
+        });
+      } else {
+        // Deselect all subcategories but keep the main category selected
+        newIds = prev.filter(id => !allSubIds.includes(id));
+        if (!newIds.includes(specialty.id)) {
+          newIds.push(specialty.id);
+        }
+      }
+      
+      // Notify parent immediately
+      onChange(newIds);
+      
+      return newIds;
+    });
+  };
+
+  // Find parent category ID for a subcategory
+  const findParentIdForSubcategory = (specialtyId: number): number | null => {
+    for (const specialty of specialties) {
+      if (specialty.subcategories?.some(sub => sub.id === specialtyId)) {
+        return specialty.id;
+      }
+    }
+    return null;
+  };
+
+  // Recursively find all subcategory IDs for a main category
+  const getAllSubcategoryIds = (specialty: Specialty): number[] => {
+    let ids: number[] = [];
+    
+    if (specialty.subcategories && specialty.subcategories.length > 0) {
+      specialty.subcategories.forEach(sub => {
+        ids.push(sub.id);
+        ids = [...ids, ...getAllSubcategoryIds(sub)];
+      });
+    }
+    
+    return ids;
+  };
+
+  if (loading) {
+    return (
+      <div className="p-4 bg-white rounded-lg shadow">
+        <div className="animate-pulse">
+          <div className="h-4 bg-gray-200 rounded w-3/4 mb-2"></div>
+          <div className="h-4 bg-gray-200 rounded w-1/2 mb-2"></div>
+          <div className="h-4 bg-gray-200 rounded w-5/6 mb-2"></div>
+        </div>
+        <p className="text-center text-gray-500 mt-2">Loading specialties...</p>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="p-4 bg-white rounded-lg shadow">
+        {error && <p className="text-red-500 mb-2">{error}</p>}
+        {loading ? (
+          <p>Loading specialties...</p>
+        ) : (
+          <>
+            <div className="flex justify-between items-center mb-2">
+              <span className="font-medium">Specialties</span>
+              {selectedIds.length > 0 && (
+                <button 
+                  type="button" 
+                  onClick={clearAllSpecialties}
+                  className="text-sm text-indigo-600 hover:text-indigo-800"
+                >
+                  Clear All
+                </button>
+              )}
+            </div>
+            {specialties.map(specialty => (
+              <div key={specialty.id} className="specialty-category">
+                <div className="flex items-center">
+                  {/* Special treatment for Books & Ephemera */}
+                  {specialty.id === 1 ? (
+                    <button
+                      type="button"
+                      onClick={(e) => {
+                        // Toggle between selected and not selected
+                        if (selectedIds.includes(specialty.id)) {
+                          // CLEARING - Remove all specialties
+                          console.log('CLEARING BOOKS & EPHEMERA AND ALL FILTERS');
+                          setSelectedIds([]);
+                          if (onChange) {
+                            onChange([]);
+                          }
+                          // Force complete reset
+                          setTimeout(() => {
+                            window.location.href = '/places';
+                          }, 10);
+                        } else {
+                          // SELECTING - Add Books & Ephemera
+                          const newIds = [...selectedIds, specialty.id];
+                          setSelectedIds(newIds);
+                          if (onChange) {
+                            onChange(newIds);
+                          }
+                        }
+                      }}
+                      className={`mr-2 px-2 py-1 text-xs font-medium rounded ${selectedIds.includes(specialty.id) ? 'bg-indigo-600 text-white' : 'bg-white text-gray-700 border border-gray-300'}`}
+                    >
+                      {selectedIds.includes(specialty.id) ? 'Selected ✓' : 'Select'}
+                    </button>
+                  ) : (
+                    <input
+                      type="checkbox"
+                      id={`specialty-${specialty.id}`}
+                      checked={selectedIds.includes(specialty.id)}
+                      onChange={(e) => {
+                        // Prevent form submission
+                        e.preventDefault();
+                        e.stopPropagation();
+                        
+                        if (mode === 'advanced') {
+                          toggleMainCategoryWithSubs(specialty);
+                        } else {
+                          toggleSpecialty(specialty.id);
+                        }
+                      }}
+                      className="mr-2 h-4 w-4 rounded border-gray-300 focus:ring-indigo-500"
+                      onClick={(e) => e.stopPropagation()} // Extra protection
+                    />
+                  )}
+                  <label 
+                    htmlFor={`specialty-${specialty.id}`}
+                    className="text-sm font-medium text-gray-700 flex-grow cursor-pointer"
+                  >
+                    {specialty.name}
+                  </label>
+                  
+                  {/* Add special reset button just for Books & Ephemera */}
+                  {specialty.id === 1 && (
+                    <button
+                      type="button"
+                      onClick={(e) => {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        // Force clear all specialties
+                        setSelectedIds([]);
+                        if (onChange) {
+                          onChange([]);
+                        }
+                        // Force refresh places directly
+                        fetch('/api/places')
+                          .then(response => response.json())
+                          .then(data => {
+                            console.log('Reset filter: Fetched all places:', data.length);
+                            // Try to find the window.setPlaces function (hack)
+                            try {
+                              const event = new CustomEvent('resetSpecialtyFilters', { detail: { success: true } });
+                              window.dispatchEvent(event);
+                            } catch (err) {
+                              console.error('Failed to dispatch reset event:', err);
+                            }
+                          });
+                      }}
+                      className="ml-1 text-xs text-indigo-600 hover:text-indigo-800"
+                    >
+                      Reset
+                    </button>
+                  )}
+                  
+                  {mode === 'advanced' && specialty.subcategories && specialty.subcategories.length > 0 && (
+                    <button
+                      onClick={(e) => {
+                        e.preventDefault(); // Prevent form submission
+                        e.stopPropagation();
+                        toggleExpand(specialty.id);
+                      }}
+                      className="ml-2 text-gray-400 hover:text-gray-600 focus:outline-none"
+                      type="button" // Explicitly set as button type to prevent form submission
+                    >
+                      {expandedCategories.includes(specialty.id) ? (
+                        <span className="h-4 w-4 inline-flex items-center justify-center">▼</span>
+                      ) : (
+                        <span className="h-4 w-4 inline-flex items-center justify-center">▶</span>
+                      )}
+                    </button>
+                  )}
+                </div>
+                
+                {/* Show subcategories in advanced mode */}
+                {mode === 'advanced' && 
+                 expandedCategories.includes(specialty.id) && 
+                 specialty.subcategories && 
+                 specialty.subcategories.length > 0 && (
+                  <div className="ml-6 mt-1 space-y-1">
+                    {specialty.subcategories.map(sub => (
+                      <div key={sub.id} className="flex items-center">
+                        <input
+                          type="checkbox"
+                          id={`specialty-${sub.id}`}
+                          checked={selectedIds.includes(sub.id)}
+                          onChange={(e) => {
+                            // Prevent form submission
+                            e.preventDefault();
+                            e.stopPropagation();
+                            toggleSpecialty(sub.id, true);
+                          }}
+                          className="mr-2 h-4 w-4 rounded border-gray-300 focus:ring-indigo-500"
+                          onClick={(e) => e.stopPropagation()} // Extra protection
+                        />
+                        <label 
+                          htmlFor={`specialty-${sub.id}`}
+                          className="text-sm text-gray-600 cursor-pointer"
+                        >
+                          {sub.name}
+                        </label>
+                      </div>
+                    ))}
+                  </div>
+                )}
+              </div>
+            ))}
+          </>
+        )}
+      </div>
+    );
+  }
+
+  if (specialties.length === 0) {
+    return (
+      <div className="p-4 bg-white rounded-lg shadow">
+        <p className="text-gray-500">No specialties available.</p>
+      </div>
+    );
+  }
+
+  return (
+    <div className="p-4 bg-white rounded-lg shadow">
+      <h3 className="font-medium text-lg mb-3">Filter by Specialty</h3>
+      <div className="space-y-2 max-h-80 overflow-y-auto">
+        {specialties.map(specialty => (
+          <div key={specialty.id} className="specialty-category">
+            <div className="flex items-center">
+              <input
+                type="checkbox"
+                id={`specialty-${specialty.id}`}
+                checked={selectedIds.includes(specialty.id)}
+                onChange={(e) => {
+                  // Prevent form submission
+                  e.preventDefault();
+                  e.stopPropagation();
+                  
+                  if (mode === 'advanced') {
+                    toggleMainCategoryWithSubs(specialty);
+                  } else {
+                    toggleSpecialty(specialty.id);
+                  }
+                }}
+                className="mr-2 h-4 w-4 rounded border-gray-300 focus:ring-indigo-500"
+                onClick={(e) => e.stopPropagation()} // Extra protection
+              />
+              <label 
+                htmlFor={`specialty-${specialty.id}`}
+                className="text-sm font-medium text-gray-700 flex-grow cursor-pointer"
+              >
+                {specialty.name}
+              </label>
+              
+              {mode === 'advanced' && specialty.subcategories && specialty.subcategories.length > 0 && (
+                <button
+                  onClick={(e) => {
+                    e.preventDefault(); // Prevent form submission
+                    e.stopPropagation();
+                    toggleExpand(specialty.id);
+                  }}
+                  className="ml-2 text-gray-400 hover:text-gray-600 focus:outline-none"
+                  type="button" // Explicitly set as button type to prevent form submission
+                >
+                  {expandedCategories.includes(specialty.id) ? (
+                    <span className="h-4 w-4 inline-flex items-center justify-center">▼</span>
+                  ) : (
+                    <span className="h-4 w-4 inline-flex items-center justify-center">▶</span>
+                  )}
+                </button>
+              )}
+            </div>
+            
+            {/* Show subcategories in advanced mode */}
+            {mode === 'advanced' && 
+             expandedCategories.includes(specialty.id) && 
+             specialty.subcategories && 
+             specialty.subcategories.length > 0 && (
+              <div className="ml-6 mt-1 space-y-1">
+                {/* Subcategory Toggle Button */}
+                <div className="flex justify-between items-center mb-2">
+                  <button
+                    type="button"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      e.stopPropagation();
+                      const hasSelectedSubs = specialty.subcategories.some(sub => selectedIds.includes(sub.id));
+                      toggleSubcategories(specialty, !hasSelectedSubs);
+                    }}
+                    className="text-xs font-medium text-indigo-600 hover:text-indigo-800 focus:outline-none"
+                  >
+                    {specialty.subcategories.some(sub => selectedIds.includes(sub.id))
+                      ? 'Clear All'
+                      : 'Select All'
+                    }
+                  </button>
+                  <span className="text-xs text-gray-500">
+                    {specialty.subcategories.filter(sub => selectedIds.includes(sub.id)).length} of {specialty.subcategories.length} selected
+                  </span>
+                </div>
+                
+                {/* Subcategory Checkboxes */}
+                {specialty.subcategories.map(sub => (
+                  <div key={sub.id} className="flex items-center">
+                    <input
+                      type="checkbox"
+                      id={`specialty-${sub.id}`}
+                      checked={selectedIds.includes(sub.id)}
+                      onChange={(e) => {
+                        // Prevent form submission
+                        e.preventDefault();
+                        e.stopPropagation();
+                        toggleSpecialty(sub.id, true);
+                      }}
+                      className="mr-2 h-4 w-4 rounded border-gray-300 focus:ring-indigo-500"
+                      onClick={(e) => e.stopPropagation()} // Extra protection
+                    />
+                    <label 
+                      htmlFor={`specialty-${sub.id}`}
+                      className="text-sm text-gray-600 cursor-pointer"
+                    >
+                      {sub.name}
+                    </label>
+                  </div>
+                ))}
+              </div>
+            )}
+          </div>
+        ))}
+      </div>
+
+      {mode === 'advanced' && (
+        <div className="mt-4 text-sm text-gray-500">
+          <p>Tip: Click on the arrows to expand/collapse subcategories</p>
+        </div>
+      )}
+
+      {selectedIds.length > 0 && (
+        <div className="mt-4">
+          <button
+            onClick={() => setSelectedIds([])}
+            className="text-sm text-indigo-600 hover:text-indigo-800"
+          >
+            Clear all filters
+          </button>
+          <span className="ml-2 text-sm text-gray-500">
+            ({selectedIds.length} {selectedIds.length === 1 ? 'specialty' : 'specialties'} selected)
+          </span>
+        </div>
+      )}
+    </div>
+  );
+}

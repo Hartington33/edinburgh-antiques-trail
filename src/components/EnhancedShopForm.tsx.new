@@ -1,0 +1,563 @@
+'use client';
+
+import React, { useState, useEffect } from 'react';
+import { useForm, Controller } from 'react-hook-form';
+import { Place, PlaceType, OpeningHour } from '@/lib/data-utils';
+import { 
+  isValidEmail, 
+  isValidUKPhone, 
+  isValidWebsite, 
+  formatPhoneNumber, 
+  formatWebsiteUrl,
+  isInEdinburghArea
+} from '@/lib/validation-utils';
+
+// Import our custom form components
+import ValidationTextField from './form/ValidationTextField';
+import ValidationTextArea from './form/ValidationTextArea';
+import ValidationSelectField from './form/ValidationSelectField';
+import FormSection from './form/FormSection';
+import BusinessHoursEditor from './form/BusinessHoursEditor';
+import LocationPicker from './form/LocationPicker';
+
+interface EnhancedShopFormProps {
+  place?: Place | null;
+  placeTypes: PlaceType[];
+  openingHours?: OpeningHour[];
+  onSubmit: (data: any, hours: OpeningHour[]) => void;
+  submitting: boolean;
+}
+
+export default function EnhancedShopForm({
+  place,
+  placeTypes,
+  openingHours = [],
+  onSubmit,
+  submitting
+}: EnhancedShopFormProps) {
+  // Keyboard shortcuts reference
+  const keyboardShortcuts = [
+    { key: 'Alt+S', action: 'Save form' },
+    { key: 'Alt+C', action: 'Cancel' },
+    { key: 'Alt+N', action: 'Focus name field' },
+    { key: 'Alt+A', action: 'Focus address field' },
+    { key: 'Alt+H', action: 'Jump to hours section' }
+  ];
+  
+  // Show/hide keyboard shortcuts helper
+  const [showShortcuts, setShowShortcuts] = useState(false);
+  // Set up form with react-hook-form
+  const { 
+    control, 
+    handleSubmit, 
+    formState: { errors, isDirty, dirtyFields }, 
+    watch,
+    setValue,
+    reset,
+    getValues
+  } = useForm({
+    defaultValues: {
+      name: place?.name || '',
+      address: place?.address || '',
+      phone: place?.phone || '',
+      email: place?.email || '',
+      website: place?.website || '',
+      description: place?.description || '',
+      specialties: place?.specialties || '',
+      lat: place?.lat || 55.9533,
+      lng: place?.lng || -3.1883,
+      type_id: place?.type_id || (placeTypes.length > 0 ? placeTypes[0].id : 1),
+      price_range: place?.price_range || '£',
+    },
+    mode: 'onBlur'
+  });
+  
+  // State for opening hours
+  const [hours, setHours] = useState<OpeningHour[]>(openingHours);
+  
+  // When place data changes, reset the form
+  useEffect(() => {
+    if (place) {
+      reset({
+        name: place.name,
+        address: place.address,
+        phone: place.phone || '',
+        email: place.email || '',
+        website: place.website || '',
+        description: place.description || '',
+        specialties: place.specialties || '',
+        lat: place.lat,
+        lng: place.lng,
+        type_id: place.type_id,
+        price_range: place.price_range || '£',
+      });
+    }
+  }, [place, reset]);
+  
+  // Quick formats for phone numbers
+  const applyPhoneFormat = (format: string) => {
+    const currentValue = getValues('phone') || '';
+    
+    switch(format) {
+      case 'uk':
+        setValue('phone', '0131 ', { shouldDirty: true });
+        break;
+      case 'mobile':
+        setValue('phone', '07', { shouldDirty: true });
+        break;
+      case 'clear':
+        setValue('phone', '', { shouldDirty: true });
+        break;
+    }
+  };
+  
+  // Quick formats for websites
+  const applyWebsiteFormat = (format: string) => {
+    const currentValue = getValues('website') || '';
+    
+    switch(format) {
+      case 'www':
+        setValue('website', 'www.', { shouldDirty: true });
+        break;
+      case 'http':
+        setValue('website', 'http://', { shouldDirty: true });
+        break;
+      case 'https':
+        setValue('website', 'https://', { shouldDirty: true });
+        break;
+      case 'clear':
+        setValue('website', '', { shouldDirty: true });
+        break;
+    }
+  };
+  
+  // Handle form submission
+  const onFormSubmit = (data: any) => {
+    // Format phone and website before submission
+    if (data.phone) {
+      // Preserve the 0131 123 1234 format
+      data.phone = data.phone.trim();
+    }
+    
+    if (data.website) {
+      // Add https:// prefix if not present but only for submission
+      if (!data.website.startsWith('http://') && !data.website.startsWith('https://')) {
+        data.website = 'https://' + data.website;
+      }
+    }
+    
+    // Add lat/lng to data as numbers
+    const submissionData = {
+      ...data,
+      lat: parseFloat(data.lat),
+      lng: parseFloat(data.lng),
+      type_id: parseInt(data.type_id.toString()),
+    };
+    
+    onSubmit(submissionData, hours);
+  };
+  
+  // Update lat/lng when location picker changes
+  const handleLocationChange = (newLat: number, newLng: number) => {
+    setValue('lat', newLat, { shouldDirty: true });
+    setValue('lng', newLng, { shouldDirty: true });
+  };
+  
+  // Handle keyboard shortcuts
+  const handleKeyDown = (e: KeyboardEvent) => {
+    // Don't handle shortcuts if in input fields
+    if (
+      e.target instanceof HTMLInputElement || 
+      e.target instanceof HTMLTextAreaElement ||
+      e.target instanceof HTMLSelectElement
+    ) {
+      return;
+    }
+    
+    // Alt + / toggles keyboard shortcuts helper
+    if (e.altKey && e.key === '/') {
+      e.preventDefault();
+      setShowShortcuts(!showShortcuts);
+    }
+    
+    // Alt + S submits the form
+    if (e.altKey && e.key === 's') {
+      e.preventDefault();
+      handleSubmit(onFormSubmit)();
+    }
+    
+    // Alt + C cancels (goes back)
+    if (e.altKey && e.key === 'c') {
+      e.preventDefault();
+      window.history.back();
+    }
+    
+    // Alt + H jumps to hours section
+    if (e.altKey && e.key === 'h') {
+      e.preventDefault();
+      document.getElementById('opening-hours-section')?.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+  
+  // Add keyboard shortcut handler
+  useEffect(() => {
+    window.addEventListener('keydown', handleKeyDown);
+    
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [handleSubmit, onFormSubmit]);
+  
+  return (
+    <form onSubmit={handleSubmit(onFormSubmit)} className="space-y-8 admin-form">
+      {/* Form Controls at Top */}
+      <div className="flex justify-between items-center mb-4">
+        <h1 className="text-2xl font-bold">{place ? 'Edit Shop' : 'Add New Shop'}</h1>
+        <div className="space-x-4">
+          <button
+            type="button"
+            className="px-4 py-2 border border-gray-300 rounded-md hover:bg-gray-50"
+            onClick={() => window.history.back()}
+            disabled={submitting}
+          >
+            Cancel
+          </button>
+          
+          <button
+            type="submit"
+            className="px-4 py-2 bg-edinburgh-blue text-white rounded-md hover:bg-edinburgh-blue/90 disabled:opacity-50"
+            disabled={submitting || (!isDirty && hours.length === 0)}
+          >
+            {submitting ? 'Saving...' : place ? 'Update Shop' : 'Create Shop'}
+          </button>
+        </div>
+      </div>
+
+      {showShortcuts && (
+        <div className="fixed top-1/4 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white p-6 shadow-xl rounded-lg z-50 w-96">
+          <h3 className="text-lg font-medium mb-4">Keyboard Shortcuts</h3>
+          <ul className="space-y-2">
+            {keyboardShortcuts.map((shortcut, index) => (
+              <li key={index} className="flex justify-between">
+                <span className="font-medium">{shortcut.key}</span>
+                <span>{shortcut.action}</span>
+              </li>
+            ))}
+          </ul>
+          <button
+            type="button"
+            className="mt-4 w-full px-4 py-2 bg-gray-200 rounded-md"
+            onClick={() => setShowShortcuts(false)}
+          >
+            Close
+          </button>
+        </div>
+      )}
+      
+      {/* Basic Information Section */}
+      <FormSection 
+        title="Basic Information" 
+        description="Essential details about the shop"
+      >
+        <div className="grid grid-cols-1 gap-6">
+          <Controller
+            name="name"
+            control={control}
+            rules={{ 
+              required: 'Shop name is required',
+              maxLength: { value: 50, message: 'Name cannot exceed 50 characters' }
+            }}
+            render={({ field }) => (
+              <ValidationTextField
+                id="name"
+                label="Shop Name"
+                value={field.value}
+                onChange={field.onChange}
+                onBlur={field.onBlur}
+                error={errors.name}
+                required
+                maxLength={50}
+                tooltip="The name of the antique shop (max 50 characters)"
+                placeholder="e.g. Edinburgh Antiques"
+              />
+            )}
+          />
+          
+          <Controller
+            name="type_id"
+            control={control}
+            rules={{ required: 'Category is required' }}
+            render={({ field }) => (
+              <ValidationSelectField
+                id="type_id"
+                label="Category"
+                required
+                value={field.value}
+                onChange={field.onChange}
+                onBlur={field.onBlur}
+                error={errors.type_id}
+                options={placeTypes.map(type => ({
+                  value: type.id,
+                  label: type.name
+                }))}
+                tooltip="The primary type of business"
+              />
+            )}
+          />
+          
+          <Controller
+            name="address"
+            control={control}
+            rules={{ 
+              required: 'Address is required',
+              maxLength: { value: 50, message: 'Address cannot exceed 50 characters' }
+            }}
+            render={({ field }) => (
+              <ValidationTextField
+                id="address"
+                label="Address"
+                value={field.value}
+                onChange={field.onChange}
+                onBlur={field.onBlur}
+                error={errors.address}
+                required
+                maxLength={50}
+                tooltip="Full shop address including postcode (max 50 characters)"
+                placeholder="123 High Street, Edinburgh, EH1 1AA"
+              />
+            )}
+          />
+          
+          <Controller
+            name="price_range"
+            control={control}
+            rules={{ 
+              required: 'Price range is required',
+              maxLength: { value: 5, message: 'Price range cannot exceed 5 £ symbols' },
+              pattern: { value: /^£+$/, message: 'Price range should only contain £ symbols' }
+            }}
+            render={({ field }) => (
+              <ValidationTextField
+                id="price_range"
+                label="Price Range"
+                value={field.value}
+                onChange={field.onChange}
+                onBlur={field.onBlur}
+                error={errors.price_range}
+                maxLength={5}
+                tooltip="Indicate the general price level using £ symbols (£ to £££££)"
+                placeholder="£ to £££££"
+              />
+            )}
+          />
+        </div>
+      </FormSection>
+      
+      {/* Contact Information Section */}
+      <FormSection 
+        title="Contact Information" 
+        description="How customers can reach the shop"
+      >
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <Controller
+            name="phone"
+            control={control}
+            rules={{ 
+              validate: value => !value || isValidUKPhone(value) || 'Please enter a valid UK phone number'
+            }}            
+            render={({ field }) => (
+              <div>
+                <ValidationTextField
+                  id="phone"
+                  label="Phone Number"
+                  value={field.value}
+                  onChange={field.onChange}
+                  onBlur={field.onBlur}
+                  error={errors.phone}
+                  tooltip="Shop's contact phone number"
+                  placeholder="0131 123 1234"
+                  maxLength={20}
+                />
+                <div className="text-sm text-gray-500 mt-1">
+                  Format as 0131 123 1234 for Edinburgh numbers
+                </div>
+                <div className="flex space-x-2 mt-1">
+                  <button type="button" className="text-xs bg-gray-100 px-2 py-1 rounded" onClick={() => applyPhoneFormat('uk')}>0131</button>
+                  <button type="button" className="text-xs bg-gray-100 px-2 py-1 rounded" onClick={() => applyPhoneFormat('mobile')}>07</button>
+                  <button type="button" className="text-xs bg-gray-100 px-2 py-1 rounded" onClick={() => applyPhoneFormat('clear')}>Clear</button>
+                </div>
+              </div>
+            )}
+          />
+          
+          <Controller
+            name="email"
+            control={control}
+            rules={{ 
+              validate: value => !value || isValidEmail(value) || 'Please enter a valid email address'
+            }}
+            render={({ field }) => (
+              <ValidationTextField
+                id="email"
+                label="Email Address"
+                value={field.value}
+                onChange={field.onChange}
+                onBlur={field.onBlur}
+                error={errors.email}
+                maxLength={50}
+                tooltip="Shop's contact email address (max 50 characters)"
+                placeholder="contact@example.com"
+              />
+            )}
+          />
+          
+          <Controller
+            name="website"
+            control={control}
+            rules={{ 
+              validate: value => !value || isValidWebsite(value) || 'Please enter a valid website URL'
+            }}            
+            render={({ field }) => (
+              <div>
+                <ValidationTextField
+                  id="website"
+                  label="Website"
+                  value={field.value}
+                  onChange={(value) => {
+                    // Strip common prefixes for display
+                    const cleanValue = String(value).replace(/^(https?:\/\/|www\.)/g, '');
+                    field.onChange(cleanValue);
+                  }}
+                  onBlur={field.onBlur}
+                  error={errors.website}
+                  tooltip="Shop's website address (domain only, no prefixes needed)"
+                  placeholder="example.co.uk"
+                  maxLength={50}
+                />
+                <div className="text-sm text-gray-500 mt-1">
+                  Enter domain name only (e.g., armchairbooks.co.uk). Required prefixes will be added automatically.
+                </div>
+              </div>
+            )}
+          />
+        </div>
+      </FormSection>
+      
+      {/* Shop Details Section */}
+      <FormSection 
+        title="Shop Details" 
+        description="Additional information about the shop"
+      >
+        <div className="grid grid-cols-1 gap-6">
+          <Controller
+            name="description"
+            control={control}
+            rules={{ 
+              maxLength: { value: 1000, message: 'Description cannot exceed 1000 characters' }
+            }}
+            render={({ field }) => (
+              <ValidationTextArea
+                id="description"
+                label="Description"
+                value={field.value}
+                onChange={field.onChange}
+                onBlur={field.onBlur}
+                error={errors.description}
+                maxLength={1000}
+                rows={5}
+                tooltip="Detailed description of the shop and what it offers"
+                placeholder="Describe the shop, its history, and what makes it special..."
+              />
+            )}
+          />
+          
+          <Controller
+            name="specialties"
+            control={control}
+            rules={{ 
+              maxLength: { value: 300, message: 'Specialties cannot exceed 300 characters' }
+            }}
+            render={({ field }) => (
+              <ValidationTextField
+                id="specialties"
+                label="Specialties"
+                value={field.value}
+                onChange={field.onChange}
+                onBlur={field.onBlur}
+                error={errors.specialties}
+                maxLength={300}
+                tooltip="Primary items or periods the shop specializes in"
+                placeholder="e.g. Victorian furniture, Art Deco jewelry, First edition books"
+              />
+            )}
+          />
+        </div>
+      </FormSection>
+      
+      {/* Opening Hours Section */}
+      <FormSection 
+        id="opening-hours-section"
+        title="Opening Hours" 
+        description="When customers can visit the shop"
+      >
+        <BusinessHoursEditor 
+          openingHours={hours} 
+          onChange={setHours}
+          placeId={place?.id}
+        />
+      </FormSection>
+      
+      {/* Location Section */}
+      <FormSection 
+        title="Shop Location" 
+        description="Where the shop is located on the map"
+      >
+        <Controller
+          name="lat"
+          control={control}
+          rules={{ 
+            required: 'Latitude is required',
+            validate: value => {
+              const floatVal = parseFloat(String(value));
+              return isInEdinburghArea(floatVal, parseFloat(String(watch('lng')))) || 'Location should be within Edinburgh area';
+            }
+          }}
+          render={({ field }) => {
+            // Convert values to string to satisfy the component's type requirements
+            const latStr = String(field.value);
+            const lngStr = String(watch('lng'));
+            return (
+              <LocationPicker
+                lat={latStr}
+                lng={lngStr}
+                address={watch('address')}
+                onChange={handleLocationChange}
+                error={errors.lat?.message || errors.lng?.message}
+              />
+            );
+          }}
+        />
+      </FormSection>
+      
+      {/* Form Controls */}
+      <div className="flex justify-end space-x-4 mt-8">
+        <button
+          type="button"
+          className="px-4 py-2 border border-gray-300 rounded-md hover:bg-gray-50"
+          onClick={() => window.history.back()}
+          disabled={submitting}
+        >
+          Cancel
+        </button>
+        
+        <button
+          type="submit"
+          className="px-4 py-2 bg-edinburgh-blue text-white rounded-md hover:bg-edinburgh-blue/90 disabled:opacity-50"
+          disabled={submitting || (!isDirty && hours.length === 0)}
+        >
+          {submitting ? 'Saving...' : place ? 'Update Shop' : 'Create Shop'}
+        </button>
+      </div>
+    </form>
+  );
+}

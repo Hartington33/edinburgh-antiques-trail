@@ -1,0 +1,218 @@
+INCOMPLETE DATA REPORT
+=====================
+
+This report identifies records with missing data that need attention.
+
+PLACE: Alan Day (ID: 17)
+Missing data: phone
+
+PLACE: Bowerbird (ID: 21)
+Missing data: phone
+
+PLACE: Bowerbird Antiques (ID: 22)
+Missing data: phone
+
+PLACE: Cabaret (ID: 23)
+Missing data: phone
+
+PLACE: Carnivale Vintage (ID: 24)
+Missing data: phone
+
+PLACE: Cavanagh�s Antiques (ID: 25)
+Missing data: phone
+
+PLACE: Cookie (ID: 26)
+Missing data: phone
+
+PLACE: Courtyard (ID: 27)
+Missing data: phone
+
+PLACE: Duncan & Reid (ID: 29)
+Missing data: phone
+
+PLACE: Drennan Sturrock (ID: 28)
+Missing data: phone
+
+PLACE: Edinburgh Antique Centre (ID: 30)
+Missing data: phone
+
+PLACE: Edinburgh Antiques & Collectors Fair (ID: 6)
+Missing data: phone
+
+PLACE: Edinburgh Auction Rooms (ID: 2)
+Missing data: phone
+
+PLACE: Edinburgh Books (ID: 31)
+Missing data: phone
+
+PLACE: Edinburgh Collectables (ID: 32)
+Missing data: phone
+
+PLACE: Elaine�s Vintage Clothing (ID: 33)
+Missing data: phone
+
+PLACE: Emporium 62 (ID: 34)
+Missing data: phone
+
+PLACE: Epoca (ID: 35)
+Missing data: phone
+
+PLACE: Folly (ID: 36)
+Missing data: phone
+
+PLACE: George Pirie  (ID: 37)
+Missing data: phone
+
+PLACE: Georgian Antiques (ID: 38)
+Missing data: phone
+
+PLACE: Godiva (ID: 39)
+Missing data: phone
+
+PLACE: Goodwins (ID: 40)
+Missing data: phone
+
+PLACE: Grange Clocks (ID: 42)
+Missing data: phone
+
+PLACE: Goodwins (ID: 41)
+Missing data: phone
+
+PLACE: Harlequin Antiques (ID: 43)
+Missing data: phone
+
+PLACE: Herman Brown (ID: 44)
+Missing data: phone
+
+PLACE: Inverleith Saleroom (ID: 45)
+Missing data: phone
+
+PLACE: Islander (ID: 46)
+Missing data: phone
+
+PLACE: Anthony Woodd (ID: 18)
+Missing data: phone
+
+PLACE: Joey D (ID: 48)
+Missing data: phone
+
+PLACE: John Love (ID: 49)
+Missing data: phone
+
+PLACE: Joseph Bonnar (ID: 50)
+Missing data: phone
+
+PLACE: Leith Antiquarian Books (ID: 3)
+Missing data: phone
+
+PLACE: Lifestyle (ID: 51)
+Missing data: phone
+
+PLACE: Little Blue Door (ID: 52)
+Missing data: phone
+
+PLACE: Martinez (ID: 53)
+Missing data: phone
+
+PLACE: McNaughtan�s Bookshop (ID: 54)
+Missing data: phone
+
+PLACE: Miss Bizio Couture (ID: 55)
+Missing data: phone
+
+PLACE: Mr Purves (ID: 56)
+Missing data: phone
+
+PLACE: Nomads Tent (ID: 57)
+Missing data: phone
+
+PLACE: Morningside Vintage (ID: 5)
+Missing data: phone
+
+PLACE: Pascal  (ID: 58)
+Missing data: phone
+
+PLACE: Patrick Buckley  (ID: 59)
+Missing data: phone
+
+PLACE: Persian Rug Village (ID: 60)
+Missing data: phone
+
+PLACE: Pie In The Sky (ID: 61)
+Missing data: phone
+
+PLACE: Quadrant  (ID: 62)
+Missing data: phone
+
+PLACE: Retro Morrison Street (ID: 63)
+Missing data: phone
+
+PLACE: Retrospect (ID: 64)
+Missing data: phone
+
+PLACE: Royal Mile Curios (ID: 65)
+Missing data: phone
+
+PLACE: Royal Mile Gallery (ID: 66)
+Missing data: phone
+
+PLACE: Simon Scott (ID: 67)
+Missing data: phone
+
+PLACE: Still Life (ID: 68)
+Missing data: phone
+
+PLACE: Stock Xchange (ID: 69)
+Missing data: phone
+
+PLACE: James Scott (ID: 47)
+Missing data: phone
+
+PLACE: The Old Town Antiques (ID: 1)
+Missing data: phone
+
+PLACE: Theodore David (ID: 70)
+Missing data: phone
+
+PLACE: Those Were The Days (ID: 71)
+Missing data: phone
+
+PLACE: Those Were The Days � Bridal (ID: 72)
+Missing data: phone
+
+PLACE: Stockbridge Vintage Records (ID: 4)
+Missing data: phone
+
+PLACE: Ugly Mugs (ID: 75)
+Missing data: phone
+
+PLACE: Unicorn (ID: 76)
+Missing data: phone
+
+PLACE: Victoria & George  (ID: 77)
+Missing data: phone
+
+PLACE: Vintage Wool Rugs (ID: 78)
+Missing data: phone
+
+PLACE: Tills Bookshop (ID: 74)
+Missing data: phone
+
+PLACE: Aquarius (ID: 19)
+Missing data: phone
+
+PLACE: Armchair Books (ID: 20)
+Missing data: phone
+
+PLACE: Yellow Souls (ID: 79)
+Missing data: phone
+
+PLACE: Young  (ID: 80)
+Missing data: phone
+
+
+SUMMARY
+=======
+Total places: 69
+Incomplete records: 69
+Complete records: 0

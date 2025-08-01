@@ -1,0 +1,93 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --foreground-rgb: 0, 0, 0;
+  --background-rgb: 245, 245, 220;
+  
+  /* Custom theme colors */
+  --edinburgh-blue: #1D3557;
+  --edinburgh-stone: #D6CFC7;
+  --antique-gold: #C29B40;
+}
+
+/* Explicit color classes that don't rely on Tailwind */
+.bg-edinburgh-blue {
+  background-color: var(--edinburgh-blue) !important;
+}
+
+.text-edinburgh-blue {
+  color: var(--edinburgh-blue) !important;
+}
+
+.bg-edinburgh-stone {
+  background-color: var(--edinburgh-stone) !important;
+}
+
+.bg-antique-gold {
+  background-color: var(--antique-gold) !important;
+}
+
+.text-white {
+  color: white !important;
+}
+
+.border-edinburgh-stone {
+  border-color: var(--edinburgh-stone) !important;
+}
+
+body {
+  color: rgb(var(--foreground-rgb));
+  background: rgb(var(--background-rgb));
+  font-size: 16px;
+}
+
+/* Form styling improvements */
+input, select, textarea {
+  font-size: 16px !important;
+}
+
+.admin-form input,
+.admin-form select,
+.admin-form textarea {
+  max-width: 500px;
+}
+
+@layer components {
+  .btn {
+    @apply px-4 py-2 rounded font-medium transition-colors;
+  }
+  
+  .btn-primary {
+    @apply bg-edinburgh-blue text-white hover:bg-opacity-90;
+  }
+  
+  .btn-secondary {
+    @apply bg-edinburgh-stone text-edinburgh-blue hover:bg-opacity-90;
+  }
+  
+  .btn-danger {
+    @apply bg-red-600 text-white hover:bg-red-700;
+  }
+  
+  .input {
+    @apply block w-full rounded-md border-gray-300 shadow-sm py-3 px-4 text-base focus:border-edinburgh-blue focus:ring focus:ring-edinburgh-blue focus:ring-opacity-50;
+  }
+  
+  .form-label {
+    @apply block text-base font-medium text-gray-700 mb-1;
+  }
+  
+  .card {
+    @apply bg-white p-6 rounded-lg shadow-md;
+  }
+  
+  .map-container {
+    @apply h-96 w-full rounded-lg overflow-hidden;
+  }
+  
+  .location-marker {
+    @apply bg-edinburgh-blue text-white p-1 rounded-full w-8 h-8 flex items-center justify-center shadow-md;
+  }
+}
