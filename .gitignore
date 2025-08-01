@@ -1,0 +1,33 @@
+.env.local
+
+# Node.js
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Build output
+.next/
+out/
+
+# Environment files
+.env*
+!.env.example
+
+# Vercel
+.vercel/
+
+# System files
+.DS_Store
+Thumbs.db
+
+# Prisma
+prisma/dev.db
+prisma/dev.db-journal
+
+# Git merge conflict files
+*.orig
+
+# BFG report directories (if used)
+*.bfg-report/
